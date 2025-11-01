@@ -20,7 +20,7 @@ const CallToAction = () => {
         </div>
 
         <div className={styles.buttonContainer}>
-          <Button href="/contato" variant="secondary">
+          <Button href="/servicos-solucoes" variant="secondary">
             Saber Mais
           </Button>
         </div>
