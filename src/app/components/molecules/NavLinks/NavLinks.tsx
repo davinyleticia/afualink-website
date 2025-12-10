@@ -3,8 +3,8 @@ import styles from './NavLinks.module.css';
 
 const links = [
   { href: '/', label: 'Home' },
-  { href: '/atendimento', label: 'Serviços de Atendimento' },
-  { href: '/carreira', label: 'Carreira' },
+  { href: '/produtos', label: 'Produtos' },
+  { href: '/atendimento', label: 'Atendimento' },
 ];
 
 const NavLinks = () => {
