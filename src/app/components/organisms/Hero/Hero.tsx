@@ -14,7 +14,7 @@ const Hero = () => {
             Transforme sua empresa com nossas soluções de consultoria em TI!
           </p>
           <Button href="/produtos" variant="primary">
-            VEJA O NOSSO PRODUTOS
+            VEJA OS NOSSO PRODUTOS
           </Button>
         </div>
         <div className={styles.imageContainer}>
