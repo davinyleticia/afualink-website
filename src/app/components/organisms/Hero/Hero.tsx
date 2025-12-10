@@ -13,8 +13,8 @@ const Hero = () => {
           <p className={styles.subheading}>
             Transforme sua empresa com nossas soluções de consultoria em TI!
           </p>
-          <Button href="/contato" variant="primary">
-            CONTATO
+          <Button href="/produtos" variant="primary">
+            VEJA O NOSSO PRODUTOS
           </Button>
         </div>
         <div className={styles.imageContainer}>
