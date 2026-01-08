@@ -4,10 +4,18 @@ import { useState } from 'react';
 import Button from '@/components/atoms/Button/Button';
 import styles from './Carreira.module.css';
 
-const jobs = [
-  { id: 1, title: "Desenvolvedor Frontend Next.js", area: "Tecnologia", type: "Remoto", level: "Pleno" },
-  { id: 2, title: "Analista de Suporte TI", area: "Atendimento", type: "Híbrido (Mogi das Cruzes)", level: "Júnior" },
-  { id: 3, title: "Executivo de Vendas B2B", area: "Comercial", type: "Remoto", level: "Sênior" },
+type Job = {
+  id: string;
+  title: string;
+  area: string;
+  type: string;
+  level: string;
+};
+
+const jobs: Job[] = [
+  // { id: 'dev-001', title: 'Desenvolvedor Frontend', area: 'Tecnologia', type: 'CLT', level: 'Pleno' },
+  // { id: 'dev-002', title: 'Desenvolvedor Backend', area: 'Tecnologia', type: 'PJ', level: 'Sênior' },
+  // { id: 'sales-001', title: 'Executivo de Vendas', area: 'Comercial', type: 'CLT', level: 'Júnior' },
 ];
 
 const CarreiraPage = () => {
@@ -31,7 +39,10 @@ const CarreiraPage = () => {
           <h2 className="text-[#003366] text-3xl font-bold mb-12">Vagas em Destaque</h2>
           
           <div className="grid gap-4">
-            {jobs.map((job) => (
+            {jobs.length === 0 && (
+              <p className="text-gray-500">No momento, não há vagas abertas.</p>
+            ) }
+            {jobs?.map((job) => (
               <div key={job.id} className={styles.jobCard}>
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 w-full">
                   <div>
