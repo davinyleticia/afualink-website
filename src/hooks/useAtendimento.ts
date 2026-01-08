@@ -1,11 +1,19 @@
 import { useState } from 'react';
 
+export type AtendimentoData = {
+  status: string;
+  id?: number;
+  titulo?: string;
+  nome?: string;
+  descricao?: string;
+  data?: string;
+};
+
 export const useAtendimento = () => {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<any>(null);
-
+  const [data, setData] = useState<AtendimentoData | null>(null);
   // Função para abrir novo ticket
-  const openTicket = async (ticketData: any) => {
+  const openTicket = async (ticketData: { email: string; titulo: string; setor: string; descricao: string }) => {
     setLoading(true);
     try {
       const response = await fetch('https://api.afulink.com.br/v1/tickets/create', {
