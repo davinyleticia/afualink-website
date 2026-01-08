@@ -9,7 +9,8 @@ export const productsData = {
     faq: [
     { q: "O Biolink é gratuito?", a: "Oferecemos um plano básico gratuito e planos premium com recursos adicionais." },
     { q: "Posso usar meu próprio domínio?", a: "Sim, nossos planos premium permitem que você conecte seu domínio personalizado." }
-    ]
+    ],
+    modules: []
 
   },
   'cms': {
@@ -21,7 +22,8 @@ export const productsData = {
     faq: [ 
       { q: "O CMS é adequado para iniciantes?", a: "Sim, nosso CMS foi projetado para ser fácil de usar, mesmo para quem não tem experiência técnica." },
       { q: "Posso integrar meu CMS com outras ferramentas?", a: "Sim, oferecemos várias integrações com ferramentas populares de marketing e análise." }
-    ]
+    ],
+    modules: []
   },
   'arquivme': {
     title: "Arquivme Drive local NAS",
@@ -32,7 +34,8 @@ export const productsData = {
     faq: [
       { q: "O Arquivme é compatível com quais sistemas operacionais?", a: "Ele é compatível com Windows, macOS e Linux." },
       { q: "Posso expandir o armazenamento depois?", a: "Sim, o sistema suporta expansão via discos adicionais." }
-    ]
+    ],
+    modules: []
 
   },
   'treinamento': {
@@ -81,6 +84,7 @@ export const productsData = {
     faq: [
       { q: "Como funciona a consultoria?", a: "Realizamos um diagnóstico completo e desenvolvemos um plano personalizado." },
       { q: "Qual o prazo médio?", a: "O prazo varia conforme o escopo, mas geralmente entre 3 a 6 meses." }
-    ]
+    ],
+    modules: []
   }
 };
