@@ -7,6 +7,11 @@ export type AtendimentoData = {
   nome?: string;
   descricao?: string;
   data?: string;
+  valid?: boolean;
+  aluno?: string;
+  curso?: string;
+  data_emissao?: string;
+  carga_horaria?: string;
 };
 
 export const useAtendimento = () => {
