@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Button from '@/app/components/atoms/Logo/Button/Button';
+import Button from '@/app/components/atoms/Button/Button';
 import styles from './Hero.module.css';
 
 const Hero = () => {

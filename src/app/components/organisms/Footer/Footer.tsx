@@ -29,8 +29,6 @@ const Footer = () => {
               <h4>Informações</h4>
               <Link href="https://docs.afu.link">Documentação</Link>
               <Link href="/atendimento#validar-certificado">Validar Certificado</Link>
-              <Link href="/landing-page">Landing Page Visitela CMS</Link>
-              <Link href="/biolink">Visitela Biolink</Link>
             </div>
             <div className={styles.linkColumn}>
               <h4>Minha Conta</h4>

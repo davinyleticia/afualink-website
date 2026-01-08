@@ -1,0 +1,73 @@
+/* components/molecules/ProductCard/ProductCard.module.css */
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid #eef2f6;
+  border-radius: 1.25rem; /* 20px */
+  padding: 2.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+/* Efeito de elevação e borda sutil no hover */
+.card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(243, 112, 33, 0.2); /* Laranja suave na borda */
+  box-shadow: 0 20px 25px -5px rgba(0, 51, 102, 0.08), 0 10px 10px -5px rgba(0, 51, 102, 0.04);
+}
+
+/* Detalhe visual: Uma linha sutil no topo que aparece no hover */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #003366, #f37021);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: left;
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.title {
+  color: #003366;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.description {
+  color: #64748b; /* Slate 500 para melhor leitura */
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+}
+
+/* Ajuste específico para garantir que o botão ocupe o espaço correto dentro do card */
+.footer :global(.button) {
+  width: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}

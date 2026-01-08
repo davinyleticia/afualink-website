@@ -1,4 +1,4 @@
-import Button from '@/app/components/atoms/Logo/Button/Button';
+import Button from '@/app/components/atoms/Button/Button';
 import styles from './CallToAction.module.css';
 
 // SVG da seta. Incluir diretamente no componente facilita o controle.
