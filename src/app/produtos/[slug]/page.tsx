@@ -72,7 +72,7 @@ const ProductPage = () => {
   <section className={ `py-20 ${styles.animatedSection} section`}>
   <div className="container mx-auto px-4 max-w-4xl">
     <h2 className="text-[#003366] text-3xl font-bold mb-10 text-center">
-      Conteúdo Programático
+      Cursos e Módulos Oferecido
     </h2>
     
     {product.modules?.map((module, i) => (
