@@ -10,7 +10,10 @@ export const productsData = {
     { q: "O Biolink é gratuito?", a: "Oferecemos um plano básico gratuito e planos premium com recursos adicionais." },
     { q: "Posso usar meu próprio domínio?", a: "Sim, nossos planos premium permitem que você conecte seu domínio personalizado." }
     ],
-    modules: []
+    modules: [],
+    gallery: [
+    { url: '/img/visitela.svg', alt: 'Interface mobile Visitela' },
+  ],
 
   },
   'cms': {
@@ -23,7 +26,11 @@ export const productsData = {
       { q: "O CMS é adequado para iniciantes?", a: "Sim, nosso CMS foi projetado para ser fácil de usar, mesmo para quem não tem experiência técnica." },
       { q: "Posso integrar meu CMS com outras ferramentas?", a: "Sim, oferecemos várias integrações com ferramentas populares de marketing e análise." }
     ],
-    modules: []
+    modules: [],
+    gallery: [
+    { url: '/images/products/biolink-1.png', alt: 'Interface mobile Visitela' },
+    { url: '/images/products/biolink-2.png', alt: 'Painel de analytics' },
+  ],
   },
   'arquivme': {
     title: "Arquivme Drive local NAS",
@@ -35,7 +42,11 @@ export const productsData = {
       { q: "O Arquivme é compatível com quais sistemas operacionais?", a: "Ele é compatível com Windows, macOS e Linux." },
       { q: "Posso expandir o armazenamento depois?", a: "Sim, o sistema suporta expansão via discos adicionais." }
     ],
-    modules: []
+    modules: [],
+    gallery: [
+    { url: '/images/products/biolink-1.png', alt: 'Interface mobile Visitela' },
+    { url: '/images/products/biolink-2.png', alt: 'Painel de analytics' },
+  ],
 
   },
   'treinamento': {
@@ -73,7 +84,8 @@ export const productsData = {
     faq: [
       { q: "O treinamento é presencial?", a: "Oferecemos modalidades tanto presenciais quanto remotas ao vivo." },
       { q: "Tem certificado?", a: "Sim, todos os participantes recebem certificação Afulink." }
-    ]
+    ],
+    gallery: []
   },
   'consultoria': {
     title: "Consultoria",
@@ -85,6 +97,8 @@ export const productsData = {
       { q: "Como funciona a consultoria?", a: "Realizamos um diagnóstico completo e desenvolvemos um plano personalizado." },
       { q: "Qual o prazo médio?", a: "O prazo varia conforme o escopo, mas geralmente entre 3 a 6 meses." }
     ],
-    modules: []
+    modules: [],
+    gallery: []
+
   }
 };

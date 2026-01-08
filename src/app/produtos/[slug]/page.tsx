@@ -107,6 +107,34 @@ const ProductPage = () => {
   </div>
 </section>
 
+{/* SEÇÃO VITRINE / SHOWCASE */}
+{product.gallery && product.gallery.length > 0 && (
+  <section className="py-20 bg-slate-50">
+    <div className="container mx-auto px-4">
+      <div className="text-center mb-12">
+        <h2 className="text-[#003366] text-3xl font-bold mb-4">Explore a Interface</h2>
+        <div className="w-16 h-1 bg-[#f37021] mx-auto"></div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-center">
+        {product.gallery.map((img, index) => (
+          <div 
+            key={index} 
+          >
+            <img 
+              src={img.url} 
+              alt={img.alt} 
+              className="object-cover transform group-hover:scale-105 transition-transform duration-500"
+            />
+            {/* Overlay sutil no hover */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#003366]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
 {/* CTA Final - Impacto para Conversão */}
 <section className="py-20 bg-[#003366] text-white">
   <div className="container mx-auto px-4 text-center">
