@@ -33,7 +33,7 @@ export const productsData = {
   ],
   },
   'arquivme': {
-    title: "Arquivme Drive local NAS",
+    title: "Arquivme Drive Local NAS",
     tagline: "Seu armazenamento, sua privacidade.",
     description: "Armazene e gerencie seus dados localmente com segurança total.",
     features: ["Acesso remoto", "Backup automático", "Criptografia avançada"],
