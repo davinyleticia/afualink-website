@@ -2,9 +2,10 @@
 
 import { useParams } from 'next/navigation';
 import { productsData } from '@/app/constants/produtos';
-import Button from '@/components/atoms/Button/Button';
+
 import styles from './ProductPage.module.css';
 import RelatedProducts from '@/components/organisms/RelatedProducts/RelatedProducts';
+import Button from '@/components/atoms/Button/Button';
 
 const ProductPage = () => {
   const params = useParams();
@@ -33,8 +34,7 @@ const ProductPage = () => {
             <p className={styles.description}>{product.description}</p>
             
             <div className="flex flex-wrap gap-4 mt-10">
-              <Button href="/contato" variant="primary">Começar agora</Button>
-              <Button href="/atendimento" variant="secondary">Falar com especialista</Button>
+              <Button href="/contato" variant="secondary">Falar com especialista</Button>
             </div>
           </div>
 
