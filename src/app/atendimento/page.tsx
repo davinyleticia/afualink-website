@@ -82,7 +82,7 @@ const AtendimentoPage = () => {
           </div>
           
           <div className="space-y-4">
-            {data.itens?.map((item: any, i: number) => (
+            {data.itens?.map((item: {status: string, id?: number, titulo?: string, nome?: string, descricao?: string, data?: string}, i: number) => (
               <div key={i} className={styles.resultItem}>
                 <div className="flex flex-col">
                   <span className="text-xs font-bold text-gray-400 uppercase">#{item.id || i+1}</span>
