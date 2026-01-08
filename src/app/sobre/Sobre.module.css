@@ -8,6 +8,12 @@
   margin: 0 auto;
 }
 
+.odsMiniBadge {
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  padding:  0.25rem 0.5rem;
+} 
+
 .timelineContainer::before {
   content: '';
   position: absolute;
