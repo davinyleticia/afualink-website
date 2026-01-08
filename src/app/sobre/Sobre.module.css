@@ -1,0 +1,87 @@
+/* src/app/sobre/Sobre.module.css */
+
+.timelineContainer {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timelineContainer::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background: #e2e8f0;
+  transform: translateX(-50%);
+}
+
+.timelineItem {
+  display: flex;
+  justify-content: flex-between;
+  align-items: center;
+  margin-bottom: 4rem;
+  width: 100%;
+  position: relative;
+}
+
+.timelineYear {
+  width: 50%;
+  padding-right: 3rem;
+  text-align: right;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #f37021;
+}
+
+.timelineContent {
+  width: 50%;
+  padding-left: 3rem;
+}
+
+.timelineItem::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  background: #003366;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  border: 4px solid white;
+}
+
+.mvvCard {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s;
+}
+
+.mvvCard:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.odsCard {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s;
+}
+
+.odsCard:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .timelineContainer::before { left: 0; }
+  .timelineItem { flex-direction: column; align-items: flex-start; }
+  .timelineYear { width: 100%; text-align: left; padding-left: 2rem; font-size: 1.5rem; }
+  .timelineContent { width: 100%; padding-left: 2rem; }
+  .timelineItem::after { left: 0; }
+}

@@ -1,0 +1,39 @@
+.aboutSection {
+  background-color: #f8f9fa; /* Um cinza bem claro, similar ao do footer */
+  padding: 5rem 0;
+}
+
+.container {
+  max-width: 1000px; /* Mais estreito para melhor legibilidade do texto */
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: center; /* Centraliza todo o texto */
+}
+
+.heading {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #0D2A57; /* Um azul marinho escuro */
+  margin-bottom: 2rem;
+}
+
+.text {
+  font-size: 1.5rem;
+  line-height: 1.7; /* Aumenta o espaçamento entre as linhas para facilitar a leitura */
+  color: #344054; /* Um cinza escuro azulado */
+}
+
+/* --- Media Query para Telas Mobile --- */
+@media (max-width: 768px) {
+  .aboutSection {
+    padding: 4rem 0;
+  }
+
+  .heading {
+    font-size: 2rem;
+  }
+
+  .text {
+    font-size: 1rem;
+  }
+}

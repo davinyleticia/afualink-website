@@ -2,8 +2,9 @@
 
 import { useParams } from 'next/navigation';
 import { productsData } from '@/app/constants/produtos';
-import Button from '@/app/components/atoms/Button/Button';
+import Button from '@/components/atoms/Button/Button';
 import styles from './ProductPage.module.css';
+import RelatedProducts from '@/components/organisms/RelatedProducts/RelatedProducts';
 
 const ProductPage = () => {
   const params = useParams();
@@ -93,7 +94,7 @@ const ProductPage = () => {
 
 {/* Seção FAQ */}
 <section className="py-20 bg-slate-50 section">
-  <div className="container mx-auto px-4 max-w-3xl text-center">
+  <div className="container mx-auto px-4 text-center">
     <h2 className="text-[#003366] text-3xl font-bold mb-12">Dúvidas Frequentes</h2>
     <div className="text-left space-y-8">
       {product.faq?.map((item, i) => (
@@ -121,6 +122,7 @@ const ProductPage = () => {
     </div>
   </div>
 </section>
+<RelatedProducts currentSlug={slug} />
     </main>
   );
 };

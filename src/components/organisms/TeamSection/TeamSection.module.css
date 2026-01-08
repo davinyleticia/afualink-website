@@ -1,0 +1,33 @@
+.teamSection {
+  padding: 2rem 0;
+  background-color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0D2A57; /* Azul marinho escuro */
+  margin-bottom: 4rem;
+}
+
+.grid {
+  display: grid;
+  /* Cria 3 colunas em telas grandes, e se ajusta para menos colunas em telas menores */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem; /* Espaçamento entre os cards */
+  justify-items: center;
+}
+
+/* --- Media Query para Telas Maiores --- */
+@media (min-width: 992px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

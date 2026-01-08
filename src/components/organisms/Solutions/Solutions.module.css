@@ -1,0 +1,24 @@
+.problemCard {
+  padding: 2rem;
+  border: 1px solid #eef2f6;
+  border-radius: 0.5rem; /* Conforme o print, bordas menos arredondadas aqui */
+  transition: border-color 0.3s ease;
+  background-color: white;
+}
+
+.problemCard:hover {
+  border-color: #f37021; /* Destaque em laranja no hover */
+}
+
+.problemTitle {
+  color: #f37021; /* Títulos laranjas conforme a imagem */
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.problemDescription {
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}

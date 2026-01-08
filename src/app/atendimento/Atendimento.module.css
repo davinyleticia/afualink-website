@@ -1,0 +1,134 @@
+/* src/app/atendimento/Atendimento.module.css */
+
+.authCard {
+  background: white;
+  padding: 3rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 40px rgba(0, 51, 102, 0.08);
+  border: 1px solid #eef2f6;
+}
+
+.authTitle {
+  color: #003366;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.label {
+  font-weight: 700;
+  color: #003366;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.inputField, .selectField {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  transition: all 0.2s;
+  background-color: #f8fafc;
+}
+
+.inputField:focus {
+  border-color: #f37021;
+  background-color: white;
+  box-shadow: 0 0 0 4px rgba(243, 112, 33, 0.1);
+}
+
+.btnVerify {
+  background-color: #28a745; /* Verde conforme solicitado */
+  color: white;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 1rem;
+}
+
+.btnVerify:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+/* ESTILO DE RESULTADOS */
+.resultItem {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid #eef2f6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.resultItem:hover {
+  border-color: #f37021;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03);
+}
+
+.iconCircle {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.downloadLink {
+  color: #f37021;
+  font-weight: 800;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  border: 2px solid #f37021;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+}
+
+.downloadLink:hover {
+  background: #f37021;
+  color: white;
+}
+
+
+.statusBadge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.bgOrange { background: #fff7ed; color: #f37021; border: 1px solid #ffedd5; }
+.bgGreen { background: #f0fdf4; color: #16a34a; border: 1px solid #dcfce7; }
+
+.selectField, .inputField {
+  width: 100%;
+  padding: 0.85rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  background: #f8fafc;
+}
+
+.resultItem {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid #eef2f6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}

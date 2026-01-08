@@ -1,0 +1,51 @@
+/* src/app/privacidade/Privacidade.module.css */
+
+.content {
+  color: #4b5563; /* Gray-600 */
+}
+
+.topic {
+  margin-bottom: 3rem;
+}
+
+.topic h2 {
+  color: #003366;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Detalhe visual: barrinha laranja antes do título */
+.topic h2::before {
+  content: '';
+  width: 4px;
+  height: 24px;
+  background-color: #f37021;
+  border-radius: 2px;
+}
+
+.topic p {
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.topic ul {
+  list-style: none;
+  padding-left: 1.5rem;
+}
+
+.topic li {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.topic li::before {
+  content: '→';
+  position: absolute;
+  left: -1.5rem;
+  color: #f37021;
+  font-weight: bold;
+}

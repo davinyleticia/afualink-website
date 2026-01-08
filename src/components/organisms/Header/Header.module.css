@@ -1,0 +1,64 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  background-color: white;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.scrolled {
+  height: 70px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between; /* Logo na esquerda, Nav na direita */
+  align-items: center;
+}
+
+.desktopNav {
+  display: none; /* Esconde no mobile */
+}
+
+.mobileMenuButton {
+  display: block; /* Mostra no mobile */
+  background: none;
+  border: none;
+  color: #003366;
+  cursor: pointer;
+}
+
+/* Ajustes para Desktop */
+@media (min-width: 1024px) {
+  .desktopNav {
+    display: block; /* Mostra links no desktop */
+  }
+
+  .mobileMenuButton {
+    display: none; /* Esconde ícone de hambúrguer no desktop */
+  }
+}
+
+/* Container do menu mobile quando aberto */
+.mobileNavContainer {
+  position: absolute;
+  top: 90px;
+  left: 0;
+  width: 100%;
+  background: white;
+  padding: 2rem;
+  border-top: 1px solid #f1f5f9;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: center;
+}

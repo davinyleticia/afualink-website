@@ -1,0 +1,18 @@
+.relatedCard {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+}
+
+.relatedCard:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}

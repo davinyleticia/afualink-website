@@ -1,9 +1,9 @@
-import OurClients from "@/app/components/organisms/OurClients/OurClients";
-import Hero from "./components/organisms/Hero/Hero";
-import AboutSection from "./components/organisms/AboutSection/AboutSection";
-import Solutions from "./components/organisms/Solutions/Solutions";
-import CallToAction from "./components/organisms/CallToAction/CallToAction";
-import TeamSection from "./components/organisms/TeamSection/TeamSection";
+import OurClients from "@/components/organisms/OurClients/OurClients";
+import TeamSection from "../components/organisms/TeamSection/TeamSection";
+import CallToActionV2 from "../components/organisms/CallToActionV2/CallToActionV2";
+import { Hero } from "@/components/organisms/Hero/Hero";
+import { AboutSection } from "@/components/organisms/AboutSection/AboutSection";
+import { Solutions } from "@/components/organisms/Solutions/Solutions";
 
 export default function HomePage() {
   return (
@@ -12,9 +12,9 @@ export default function HomePage() {
       <Hero />
       <AboutSection />
       <Solutions />
-      <CallToAction />
       <TeamSection />
       <OurClients />
+      <CallToActionV2 />
     </>
   );
 }

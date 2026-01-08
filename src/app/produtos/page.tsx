@@ -1,4 +1,4 @@
-import ProductsSection from "../components/organisms/ProductsSection/ProductsSection";
+import ProductsSection from "../../components/organisms/ProductsSection/ProductsSection";
 
 
 
