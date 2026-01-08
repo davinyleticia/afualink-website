@@ -116,7 +116,7 @@ const ProductPage = () => {
         <div className="w-16 h-1 bg-[#f37021] mx-auto"></div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2a gap-8 items-center">
         {product.gallery.map((img, index) => (
           <div 
             key={index} 
