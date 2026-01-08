@@ -70,7 +70,7 @@ const ProductPage = () => {
       {/* Seção de Módulos/Cursos (Aparece apenas se houver 'modules') */}
         {product.modules && product.modules.length > 0 && (
   <section className={ `py-20 ${styles.animatedSection} section`}>
-  <div className="container mx-auto px-4 max-w-4xl">
+  <div className="container mx-auto px-4">
     <h2 className="text-[#003366] text-3xl font-bold mb-10 text-center">
       Cursos e Módulos Oferecido
     </h2>
