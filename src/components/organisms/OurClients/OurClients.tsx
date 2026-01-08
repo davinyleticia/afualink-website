@@ -29,7 +29,6 @@ const OurClients = () => {
 {/* Seção Clientes */}
       <section className="py-16 bg-slate-50 border-t border-gray-100">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-gray-400 font-bold uppercase tracking-widest text-sm mb-12">Nossos Clientes</h2>
           <div className="flex flex-wrap justify-center items-center gap-12 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
             {clients.map((client) => (
               <div key={client.name} className="flex justify-center items-center">
