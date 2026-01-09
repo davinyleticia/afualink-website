@@ -26,8 +26,8 @@ const OrcamentoPage = () => {
 
                 const json = await res.json();
                 setData(json);
-            } catch (err: any) {
-                setError(err.message);
+            } catch (err: unknown) {
+                setError((err as Error).message);
             } finally {
                 setLoading(false);
             }

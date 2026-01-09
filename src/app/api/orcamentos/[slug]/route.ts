@@ -1,7 +1,17 @@
 // src/app/api/orcamentos/[slug]/route.ts
 import { NextResponse } from 'next/server';
 
-const orcamentosDB: Record<string, any> = {
+interface Orcamento {
+  titulo: string;
+  cliente: string;
+  descricao: string;
+  validade: string;
+  total: string;
+  itens: { serviço: string; valor: string }[];
+}
+
+
+const orcamentosDB: Record<string, Orcamento> = {
   'projeto-biolink-2026': {
     titulo: "Implementação Visitela Biolink Premium",
     cliente: "Academia Fitness Total",
