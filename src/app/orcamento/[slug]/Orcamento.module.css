@@ -1,0 +1,130 @@
+.wrapper {
+  min-height: 100vh;
+  padding-top: 120px;
+  padding-bottom: 80px;
+  background-color: #f8fafc;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.container {
+  background: white;
+  width: 95%;
+  max-width: 850px;
+  padding: 3.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 51, 102, 0.06);
+  border: 1px solid #eef2f6;
+}
+
+.headerProposal {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #f8fafc;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead {
+  background-color: #f8fafc;
+}
+
+.table th {
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  color: #003366;
+  text-transform: uppercase;
+}
+
+.table td {
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.95rem;
+  color: #475569;
+}
+
+.footerOrcamento {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #eef2f6;
+}
+
+.btnPrint {
+  background-color: #003366;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btnPrint:hover {
+  background-color: #f37021;
+  transform: translateY(-2px);
+}
+
+.statusMsg {
+  padding: 150px 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* --- REGRAS DE IMPRESSÃO SEGURAS --- */
+@media print {
+  :global(body) {
+    background: white !important;
+  }
+  
+  /* Esconde o Header e Footer padrão do site que estão fora do wrapper */
+  :global(header), 
+  :global(footer), 
+  :global(nav) {
+    display: none !important;
+  }
+
+  .wrapper {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: white !important;
+    display: block !important;
+  }
+
+  .container {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  /* Garante que o header interno do orçamento apareça */
+  .headerProposal {
+    display: flex !important;
+    border-bottom: 2px solid #eee !important;
+  }
+
+  .btnPrint {
+    display: none !important;
+  }
+
+  :global(*) {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  .footerOrcamento{
+    flex-direction: column;
+  }
+}
