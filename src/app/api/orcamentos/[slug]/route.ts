@@ -1,5 +1,5 @@
 // src/app/api/orcamentos/[slug]/route.ts
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 interface Orcamento {
   titulo: string;
