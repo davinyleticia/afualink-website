@@ -26,12 +26,11 @@ const orcamentosDB: Record<string, Orcamento> = {
 };
 
 export async function GET(
-  request: Request,
-  context: { params: { slug: string } } // Alterado para context
+  request: NextRequest,
+  { params }: { params: Promise<{ slug: string }> } // Tipagem como Promise
 ) {
-  // Em versões recentes, pode ser necessário aguardar o params
-  const params = await context.params; 
-  const slug = params.slug;
+  // Aguarda a resolução dos parâmetros
+  const { slug } = await params; 
   
   const orcamento = orcamentosDB[slug];
 
