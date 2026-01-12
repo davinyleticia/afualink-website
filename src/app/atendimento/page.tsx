@@ -13,8 +13,10 @@ export default function AtendimentoPage() {
   const [password, setPassword] = useState('');
   const [service, setService] = useState('');
   const [codigoCertificado, setCodigoCertificado] = useState('');
+  const [resultData, setResultData] = useState<string | null>(null);
+  const [resultDataError, setResultDataError] = useState<string | null>(null);
 
-  const { fetchData, validateCertificate, data, loading } = useAtendimento();
+  const { fetchData, validateCertificate, data, loading, error } = useAtendimento();
 
   // 1. Lógica de Consulta (Com Senha)
   const handleConsulta = async (e: React.FormEvent) => {
@@ -28,15 +30,17 @@ export default function AtendimentoPage() {
   // 2. Lógica de Validação de Certificado (Sem Senha)
   const handleValidacao = async (e: React.FormEvent) => {
     e.preventDefault();
+    setResultData(null);
+    setResultDataError(null);
     const result = await validateCertificate(ra, codigoCertificado);
-
-    if (result?.result === "valided") {
-      alert(`Certificado Válido! Pertence a: ${result.user}`);
+    if (result.result === 'valided') {
+      setResultData("Certificado Válido!");
     } else {
-      alert("Certificado Inválido ou não encontrado.");
+      setResultDataError("Certificado Inválido ou Não Encontrado.");
     }
-  };
 
+  };
+  console.log(resultData)
   return (
     <main className="min-h-screen pt-32 pb-20 bg-slate-50 flex items-center justify-center p-4">
       {!section ? (
@@ -57,6 +61,7 @@ export default function AtendimentoPage() {
             >
               Validar Certificado
             </button>
+
           </div>
 
           {/* FORMULÁRIO DE CONSULTA (CERTIFICADOS/FINANCEIRO/DOCS) */}
@@ -76,12 +81,19 @@ export default function AtendimentoPage() {
 
           {/* FORMULÁRIO DE VALIDAÇÃO (PÚBLICO) */}
           {mode === 'validacao' && (
-            <form onSubmit={handleValidacao} className="flex flex-col gap-4">
-              <p className="text-xs text-gray-500 text-center mb-2">Valide a autenticidade de certificados emitidos pela Afulink.</p>
-              <input type="text" placeholder="RA do Aluno" className={styles.inputField} value={ra} onChange={e => setRa(e.target.value)} required />
-              <input type="text" placeholder="Código do Certificado" className={styles.inputField} value={codigoCertificado} onChange={e => setCodigoCertificado(e.target.value)} required />
-              <button className={`${styles.btnVerify} bg-[#f37021]`} disabled={loading}>{loading ? 'Validando...' : 'Validar Agora'}</button>
-            </form>
+            <>
+              <form onSubmit={handleValidacao} className="flex flex-col gap-4">
+                <p className="text-xs text-gray-500 text-center mb-2">Valide a autenticidade de certificados emitidos pela Afulink.</p>
+
+                <input type="text" placeholder="RA do Aluno" className={styles.inputField} value={ra} onChange={e => setRa(e.target.value)} required />
+                <input type="text" placeholder="Código do Certificado" className={styles.inputField} value={codigoCertificado} onChange={e => setCodigoCertificado(e.target.value)} required />
+                <button className={`${styles.btnVerify} bg-[#f37021]`} disabled={loading}>{loading ? 'Validando...' : 'Validar Agora'}</button>
+              </form>
+              <div className="h-4 my-4 flex flex-col items-center justify-center">
+                {resultDataError && <div className=" text-red-500 text-l">{resultDataError}</div>}
+                {resultData && <p className=" text-green-500 text-l">{resultData}</p>}
+              </div>
+            </>
           )}
         </div>
       ) : (<>

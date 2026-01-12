@@ -22,7 +22,8 @@ export type AtendimentoData = {
 export const useAtendimento = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<AtendimentoData[] | AtendimentoData | null>(null);
-
+  const [error, setError] = useState<string | null>(null);
+  
   // 1. Abrir Novo Ticket
   const openTicket = async (ticketData: { email: string; title: string; category: string; description: string }) => {
     setLoading(true);
@@ -36,10 +37,11 @@ export const useAtendimento = () => {
       const result = await response.json();
 
       if (response.ok) {
-        alert("Ticket criado com sucesso!");
+        setError(null);
         return true;
       } else {
-        alert(result.message || "Erro ao criar ticket.");
+        setError(result.error || "Erro ao criar ticket.");
+        alert(result.error || "Erro ao criar ticket.");
         return false;
       }
     } catch (error) {
@@ -71,6 +73,7 @@ export const useAtendimento = () => {
       setData(result);
       return result;
     } catch (error: any) {
+      setError(error.message || "Erro ao buscar dados.");
       alert(error.message || "Erro ao buscar dados.");
       return null;
     } finally {
@@ -92,6 +95,7 @@ export const useAtendimento = () => {
       setData(result);
       return result;
     } catch (error) {
+      setError("Erro ao validar certificado.");
       alert("Erro ao validar certificado.");
       return null;
     } finally {
@@ -99,5 +103,5 @@ export const useAtendimento = () => {
     }
   };
 
-  return { fetchData, openTicket, validateCertificate, data, loading };
+  return { fetchData, openTicket, validateCertificate, data, loading, error };
 };
