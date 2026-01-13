@@ -8,8 +8,8 @@ export const productsData = {
     color: "#f37021",
     faq: [
     { q: "Como fica o url do meu biolink?", a: "visite.la/seunome" },
-    { q: "Posso ter ilimitados links?", a: "Sim, não há limite para a quantidade de links que você pode adicionar." }
-    {q: "O painel de controle é fácil de usar?", a: "Sim, nosso painel é intuitivo e fácil de navegar." }
+    { q: "Posso ter ilimitados links?", a: "Sim, não há limite para a quantidade de links que você pode adicionar." },
+    { q: "O painel de controle é fácil de usar?", a: "Sim, nosso painel é intuitivo e fácil de navegar." }
     ],
     modules: [],
     gallery: [
