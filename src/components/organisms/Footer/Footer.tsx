@@ -28,7 +28,7 @@ const Footer = () => {
             <div className={styles.linkColumn}>
               <h4>Informações</h4>
               <Link href="https://docs.afu.link">Documentação</Link>
-              <Link href="/validar-certificado">Validar Certificado</Link>
+              <Link href="/atendimento/?section=validar-certificado">Validar Certificado</Link>
             </div>
             <div className={styles.linkColumn}>
               <h4>Minha Conta</h4>

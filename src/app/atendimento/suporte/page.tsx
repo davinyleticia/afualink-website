@@ -38,7 +38,7 @@ export default function SuportePage() {
 
     return (
         <main className="min-h-screen pt-32 bg-slate-50 p-4">
-            {!isLogged ? (
+            {!isLogged ? (<>
                 <div className={styles.authCard + " mx-auto"}>
                     <h2 className={styles.authTitle}>Suporte Afulink</h2>
                     <p className="text-center text-gray-500 text-sm mb-6">Acesse com seu RA e Senha para gerenciar seus chamados.</p>
@@ -47,7 +47,20 @@ export default function SuportePage() {
                         <input type="password" placeholder="Sua Senha" className={styles.inputField} onChange={e => setPassword(e.target.value)} required />
                         <button className={styles.btnVerify} disabled={loading}>{loading ? 'Verificando...' : 'Acessar Suporte'}</button>
                     </form>
+                    <hr className='w-full my-6'></hr>
+                    <div className="flex items-center gap-6 py-4">
+
+                        <div className={styles.iconBox}>📧</div>
+                        <div>
+                            <h3 className="font-bold text-[#003366]">Suporte para não clientes</h3>
+                            <p className="text-gray-500 text-sm">suporte@afulink.com.br</p>
+                        </div>
+                    </div>
                 </div>
+
+
+
+            </>
             ) : (
                 <div className="max-w-4xl mx-auto">
                     <div className="flex justify-between items-center mb-8">
@@ -145,8 +158,8 @@ export default function SuportePage() {
                                     return (
                                         <div key={index} className={`max-w-[85%] flex flex-col ${isMe ? 'self-end' : 'self-start'}`}>
                                             <div className={`p-3 rounded-2xl text-sm ${isMe
-                                                    ? 'bg-[#003366] text-white rounded-tr-none'
-                                                    : 'bg-white border border-slate-200 text-gray-800 rounded-tl-none shadow-sm'
+                                                ? 'bg-[#003366] text-white rounded-tr-none'
+                                                : 'bg-white border border-slate-200 text-gray-800 rounded-tl-none shadow-sm'
                                                 }`}>
                                                 {msg.content}
                                             </div>

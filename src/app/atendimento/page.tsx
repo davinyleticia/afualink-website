@@ -13,8 +13,8 @@ export default function AtendimentoPage() {
   const [password, setPassword] = useState('');
   const [service, setService] = useState('');
   const [codigoCertificado, setCodigoCertificado] = useState('');
-  const [resultData, setResultData] = useState<string | null>(null);
-  const [resultDataError, setResultDataError] = useState<string | null>(null);
+  const [resultData, setResultData] = useState<[] | string | null>(null);
+  const [resultDataError, setResultDataError] = useState<[]| string | null>(null);
 
   const { fetchData, validateCertificate, data, loading, error } = useAtendimento();
 
@@ -40,7 +40,7 @@ export default function AtendimentoPage() {
     }
 
   };
-  console.log(resultData)
+
   return (
     <main className="min-h-screen pt-32 pb-20 bg-slate-50 flex items-center justify-center p-4">
       {!section ? (
@@ -77,6 +77,7 @@ export default function AtendimentoPage() {
               <input type="password" placeholder="Sua Senha" className={styles.inputField} value={password} onChange={e => setPassword(e.target.value)} required />
               <button className={styles.btnVerify} disabled={loading}>{loading ? 'Aguarde...' : 'Entrar'}</button>
             </form>
+            
           )}
 
           {/* FORMULÁRIO DE VALIDAÇÃO (PÚBLICO) */}
@@ -89,7 +90,7 @@ export default function AtendimentoPage() {
                 <input type="text" placeholder="Código do Certificado" className={styles.inputField} value={codigoCertificado} onChange={e => setCodigoCertificado(e.target.value)} required />
                 <button className={`${styles.btnVerify} bg-[#f37021]`} disabled={loading}>{loading ? 'Validando...' : 'Validar Agora'}</button>
               </form>
-              <div className="h-4 my-4 flex flex-col items-center justify-center">
+              <div className="h-4 my-0 flex flex-col items-center justify-center">
                 {resultDataError && <div className=" text-red-500 text-l">{resultDataError}</div>}
                 {resultData && <p className=" text-green-500 text-l">{resultData}</p>}
               </div>
@@ -97,11 +98,12 @@ export default function AtendimentoPage() {
           )}
         </div>
       ) : (<>
-        <div className="flex flex-col items-start w-full max-w-6xl mb-6 px-2"> {/* Adicionado padding lateral para mobile */}
+        <div className="flex flex-col items-start w-full max-w-6xl mb-6"> 
           <div className="w-full flex justify-between items-start md:items-center mb-6 gap-4">
             <div className="flex-1">
-              <h2 className="text-xl md:text-2xl font-bold text-[#003366]">Seus Resultados</h2>
-              <p className="text-xs md:text-sm text-gray-500">Aqui estão os resultados da sua consulta.</p>
+              {data.length > 0 && (<><h2 className="text-xl md:text-2xl font-bold text-[#003366]">Seus Resultados</h2><p className="text-xs md:text-sm text-gray-500">Aqui estão os resultados da sua consulta.</p></>)}
+              {data.length === 0 && (<><h2 className="text-xl md:text-2xl font-bold text-red-500">Nenhum resultado encontrado</h2><p className="text-xs md:text-sm text-gray-500">Tente novamente com outros dados.</p></>)}
+             
             </div>
             <button
               onClick={() => { setSection(false); }}

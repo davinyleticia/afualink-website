@@ -21,7 +21,7 @@ export type AtendimentoData = {
 
 export const useAtendimento = () => {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<AtendimentoData[] | AtendimentoData | null>(null);
+  const [data, setData] = useState<AtendimentoData[] | []>([]);
   const [error, setError] = useState<string | null>(null);
 
   // 1. Abrir Novo Ticket (Autenticado)
@@ -55,7 +55,7 @@ export const useAtendimento = () => {
   // servico pode ser: 'certificates/list_certificates', 'invoices/list_invoices', etc.
   const fetchData = async (ra: string, pass: string, servico: string) => {
     setLoading(true);
-    setData(null);
+    setData([]);
     try {
       const response = await fetch(`${API_BASE_URL}/${servico}`, {
         method: 'POST',

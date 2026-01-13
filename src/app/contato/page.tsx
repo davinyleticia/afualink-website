@@ -37,26 +37,20 @@ const ContatoPage = () => {
               <div className="flex items-center gap-6">
                 <div className={styles.iconBox}>📍</div>
                 <div>
-                  <h3 className="font-bold text-[#003366]">Escritório Central</h3>
-                  <p className="text-gray-500 text-sm">Mogi das Cruzes, SP - Brasil</p>
+                  <h3 className="font-bold text-[#003366]">Escritório </h3>
+                  <p className="text-gray-500 text-sm">SP - Brasil</p>
                 </div>
               </div>
 
               <div className="flex items-center gap-6">
                 <div className={styles.iconBox}>📧</div>
                 <div>
-                  <h3 className="font-bold text-[#003366]">E-mail</h3>
+                  <h3 className="font-bold text-[#003366]">E-mail comercial</h3>
                   <p className="text-gray-500 text-sm">contacto@afulink.com.br</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-6">
-                <div className={styles.iconBox}>💬</div>
-                <div>
-                  <h3 className="font-bold text-[#003366]">WhatsApp Business</h3>
-                  <p className="text-gray-500 text-sm">+55 (11) 99999-9999</p>
-                </div>
-              </div>
+               
             </div>
 
             {/* SELO DE SEGURANÇA / LGPD */}

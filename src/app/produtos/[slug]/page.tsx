@@ -144,9 +144,9 @@ const ProductPage = () => {
     </p>
     <div className="flex flex-wrap justify-center gap-4">
       <Button href="/contato" variant="primary">Solicitar Orçamento</Button>
-      <a href="https://wa.me/seunumeroaqui" className="border-2 border-white/30 hover:bg-white/10 px-8 py-3 rounded-full font-bold transition-all">
+      {/* <a href="https://wa.me/seunumeroaqui" className="border-2 border-white/30 hover:bg-white/10 px-8 py-3 rounded-full font-bold transition-all">
         Falar no WhatsApp
-      </a>
+      </a> */}
     </div>
   </div>
 </section>
