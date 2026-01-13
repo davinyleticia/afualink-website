@@ -23,7 +23,7 @@ export const useAtendimento = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<AtendimentoData[] | AtendimentoData | null>(null);
   const [error, setError] = useState<string | null>(null);
-  
+
   // 1. Abrir Novo Ticket (Autenticado)
   const openTicket = async (ticketData: { ra: string; password: string; title: string; category: string; description: string }) => {
     setLoading(true);
@@ -34,7 +34,7 @@ export const useAtendimento = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(ticketData), // Agora envia RA e Password junto
       });
-      
+
       const result = await response.json();
 
       if (response.ok) {
@@ -45,26 +45,6 @@ export const useAtendimento = () => {
       }
     } catch (err) {
       setError("Erro de conexão com o servidor.");
-      return false;
-    } finally {
-      setLoading(false);
-    }
-  };
-
-
-
-  // 3. Enviar Resposta em Ticket Existente
-  const sendReply = async (ra: string, pass: string, ticketId: number, content: string) => {
-    setLoading(true);
-    try {
-      const response = await fetch(`${API_BASE_URL}/tickets/reply`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ra, password: pass, ticket_id: ticketId, content }),
-      });
-      return response.ok;
-    } catch (err) {
-      setError("Erro ao enviar mensagem.");
       return false;
     } finally {
       setLoading(false);
@@ -99,7 +79,33 @@ export const useAtendimento = () => {
       setLoading(false);
     }
   };
+  const sendReply = async (ra: string, pass: string, ticketId: number, content: string) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/tickets/reply`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ra: ra,
+          password: pass,
+          ticket_id: ticketId,
+          content: content
+        }),
+      });
 
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.error || "Erro ao enviar resposta");
+      }
+
+      return true;
+    } catch (err: any) {
+      setError(err.message);
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  };
   // 3. Validação de Certificado (Pública - Sem senha)
   const validateCertificate = async (ra: string, code: string) => {
     setLoading(true);
@@ -109,7 +115,7 @@ export const useAtendimento = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ra: ra, code_c: code }),
       });
-      
+
       const result = await response.json();
       setData(result);
       return result;
@@ -122,7 +128,9 @@ export const useAtendimento = () => {
     }
   };
 
-  return { fetchData, openTicket, validateCertificate, data, loading, error };
+
+
+  return { fetchData, openTicket, validateCertificate, sendReply, data, loading, error };
 };
 
 export default useAtendimento;

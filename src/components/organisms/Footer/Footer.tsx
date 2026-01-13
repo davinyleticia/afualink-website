@@ -33,7 +33,7 @@ const Footer = () => {
             <div className={styles.linkColumn}>
               <h4>Minha Conta</h4>
               <Link href="/atendimento">Serviços de Atendimento</Link>
-           
+              <Link href="/atendimento/suporte">Suporte / Ticket</Link>
             </div>
             <div className={styles.linkColumn}>
               <h4>Rede Sociais</h4>
