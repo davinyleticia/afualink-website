@@ -27,7 +27,7 @@ const CarreiraPage = () => {
           <span className="text-[#f37021] font-bold uppercase tracking-widest text-sm mb-4 block">Trabalhe Conosco</span>
           <h1 className="text-[#003366] text-4xl md:text-6xl font-black mb-6">Venha inovar com a Afulink</h1>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
-            Estamos em busca de talentos que desejam transformar o mercado de tecnologia. 
+            Estamos em busca de talentos que desejam transformar o mercado de tecnologia.
             Aqui, valorizamos a criatividade, o foco em resultados e o aprendizado contínuo.
           </p>
         </div>
@@ -37,11 +37,11 @@ const CarreiraPage = () => {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-[#003366] text-3xl font-bold mb-12">Vagas em Destaque</h2>
-          
+
           <div className="grid gap-4">
             {jobs.length === 0 && (
               <p className="text-gray-500">No momento, não há vagas abertas.</p>
-            ) }
+            )}
             {jobs?.map((job) => (
               <div key={job.id} className={styles.jobCard}>
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 w-full">
@@ -63,39 +63,17 @@ const CarreiraPage = () => {
 
       {/* SECTION: BANCO DE TALENTOS (FORM) */}
       <section className="py-20 bg-[#003366] text-white">
-        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
+        <div className="container mx-auto px-4 max-w-3xl space-y-8 text-center">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Não encontrou sua vaga?</h2>
-            <p className="text-blue-100 text-lg mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-0">Não encontrou sua vaga?</h2>
+            <p className="text-blue-100 text-lg mb-6">
               Deixe seu currículo em nosso banco de talentos. Assim que surgir uma oportunidade que combine com seu perfil, entraremos em contato.
             </p>
           </div>
-          
-         <div className="bg-white p-8 rounded-2xl shadow-xl">
-  <form className="flex flex-col gap-4">
-    <input type="text" placeholder="Nome Completo" className={styles.input} required />
-    
-    <div className="grid md:grid-cols-1 gap-4">
-      <input type="email" placeholder="E-mail" className={styles.input} required />
-    </div>
 
-    <select className={styles.input} required>
-      <option value="">Área de Interesse</option>
-      <option value="tech">Tecnologia / Dev</option>
-      <option value="sales">Comercial / Vendas</option>
-      <option value="support">Suporte / Atendimento</option>
-    </select>
-<input 
-        type="url" 
-        placeholder="Link do LinkedIn" 
-        className={styles.input} 
-        required 
-      />
-   
-
-    <button type="submit" className={styles.btnSubmit}>Enviar Candidatura</button>
-  </form>
-</div>
+          <div className="p-8 rounded-2xl shadow-xl">
+            <a href="mailto:contato@afualink.com" className={styles.btnSubmit}>Enviar Candidatura</a>
+          </div>
         </div>
       </section>
     </main>
