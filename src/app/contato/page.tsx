@@ -12,7 +12,7 @@ const ContatoPage = () => {
     // Simulação de envio
     setTimeout(() => {
       setLoading(false);
-      alert('Mensagem enviada com sucesso! Nossa equipa entrará em contacto em breve.');
+      alert('Mensagem enviada com sucesso! Nossa equipa entrará em contato em breve.');
     }, 2000);
   };
 
@@ -24,7 +24,7 @@ const ContatoPage = () => {
           {/* COLUNA 1: INFO E SUPORTE */}
           <div className="space-y-12">
             <div>
-              <span className="text-[#f37021] font-bold uppercase tracking-widest text-sm mb-4 block">Contacto</span>
+              <span className="text-[#f37021] font-bold uppercase tracking-widest text-sm mb-4 block">Contato</span>
               <h1 className="text-[#003366] text-4xl md:text-5xl font-black mb-6 leading-tight">
                 Estamos prontos para <br/>impulsionar o seu negócio.
               </h1>
@@ -46,7 +46,7 @@ const ContatoPage = () => {
                 <div className={styles.iconBox}>📧</div>
                 <div>
                   <h3 className="font-bold text-[#003366]">E-mail comercial</h3>
-                  <p className="text-gray-500 text-sm">contacto@afulink.com.br</p>
+                  <p className="text-gray-500 text-sm">contato@afulink.com.br</p>
                 </div>
               </div>
 
