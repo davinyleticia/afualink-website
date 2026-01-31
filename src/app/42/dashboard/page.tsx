@@ -7,12 +7,7 @@ export default function AdminDashboard() {
   const router = useRouter();
   const [adminName, setAdminName] = useState('');
 
-  useEffect(() => {
-    // Verifica se o admin está logado
-    const name = localStorage.getItem('admin_name');
-    if (!name) router.push('/42/login');
-    setAdminName(name || 'Admin');
-  }, [router]);
+
 
   const menuItems = [
     {
