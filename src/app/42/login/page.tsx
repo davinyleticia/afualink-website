@@ -26,11 +26,12 @@ export default function AdminLoginPage() {
       const data = await res.json();
 
       if (res.ok) {
-        // Armazena as credenciais temporariamente (ou use um Context/Cookie para segurança)
-        localStorage.setItem('admin_ra', ra);
-        localStorage.setItem('admin_pass', password);
+        // --- MUDANÇA AQUI: Armazenamos o Token e o Nome, nunca a senha ---
+        localStorage.setItem('admin_token', data.access_token);
+        localStorage.setItem('admin_name', data.admin_name);
         
-        router.push('/42/suporte'); // Redireciona para o painel de suporte
+        // Redireciona para a Dashboard que criamos
+        router.push('/42/dashboard'); 
       } else {
         setError(data.error || "Erro ao acessar painel.");
       }
@@ -60,6 +61,7 @@ export default function AdminLoginPage() {
             type="text" 
             placeholder="Usuário Admin (RA)" 
             className={styles.inputField} 
+            value={ra}
             onChange={e => setRa(e.target.value)}
             required 
           />
@@ -67,6 +69,7 @@ export default function AdminLoginPage() {
             type="password" 
             placeholder="Senha Mestra" 
             className={styles.inputField} 
+            value={password}
             onChange={e => setPassword(e.target.value)}
             required 
           />

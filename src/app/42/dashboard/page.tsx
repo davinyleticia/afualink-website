@@ -7,7 +7,19 @@ export default function AdminDashboard() {
   const router = useRouter();
   const [adminName, setAdminName] = useState('');
 
+  useEffect(() => {
+    // 1. Busca o token e o nome salvos no login
+    const token = localStorage.getItem('admin_token');
+    const name = localStorage.getItem('admin_name');
 
+    // 2. Proteção de Rota: Se não houver token, volta para o login
+    if (!token) {
+      router.push('/42/login');
+      return;
+    }
+
+    setAdminName(name || 'Administrador');
+  }, [router]);
 
   const menuItems = [
     {
@@ -47,10 +59,15 @@ export default function AdminDashboard() {
         <div className="max-w-6xl mx-auto flex justify-between items-end">
           <div>
             <p className="text-orange-400 font-bold text-xs uppercase tracking-widest">Painel de Controle</p>
-            <h1 className="text-3xl font-black">Olá, {adminName}</h1>
+            <h1 className="text-3xl font-black italic">Olá, {adminName}</h1>
           </div>
           <button 
-            onClick={() => { localStorage.clear(); router.push('/42/login'); }}
+            onClick={() => { 
+              // Limpa tudo ao sair
+              localStorage.removeItem('admin_token');
+              localStorage.removeItem('admin_name');
+              router.push('/42/login'); 
+            }}
             className="text-xs bg-red-500/20 hover:bg-red-500 px-4 py-2 rounded font-bold transition"
           >
             Sair do Sistema
@@ -71,15 +88,15 @@ export default function AdminDashboard() {
                 {item.icon}
               </div>
               <h3 className="font-bold text-[#003366] text-lg">{item.title}</h3>
-              <p className="text-gray-500 text-xs mt-1">{item.desc}</p>
-              <div className="mt-6 text-[10px] font-black text-gray-300 group-hover:text-orange-500 transition">
-                ACESSAR MÓDULO ➔
+              <p className="text-gray-500 text-xs mt-1 leading-relaxed">{item.desc}</p>
+              <div className="mt-6 text-[10px] font-black text-gray-300 group-hover:text-orange-500 transition uppercase">
+                Acessar Módulo ➔
               </div>
             </button>
           ))}
         </div>
 
-        {/* Status Rápido */}
+        {/* Status Rápido - No futuro você fará um fetch aqui para dados reais */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-2xl border border-slate-200">
             <h4 className="text-gray-400 font-bold text-[10px] uppercase">Chamados em Aberto</h4>
