@@ -17,7 +17,7 @@ export default function AdminLoginPage() {
     setError(null);
 
     try {
-      const res = await fetch('https://serverless-tau-green.vercel.app/customer_service/42/login', {
+      const res = await fetch('https://serverless-tau-green.vercel.app/api/customer_service/42/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ra, password }),
