@@ -53,7 +53,7 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <main className="min-h-screen bg-slate-100 pb-20">
+    <main className="min-h-screen pt-10 bg-slate-100 p-4">
       {/* Header Adm */}
       <div className="bg-[#003366] text-white py-12 px-6">
         <div className="max-w-6xl mx-auto flex justify-between items-end">
