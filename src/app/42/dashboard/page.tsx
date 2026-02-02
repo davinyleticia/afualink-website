@@ -1,188 +1,116 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from '../../atendimento/Atendimento.module.css';
+import { useEffect, useState } from 'react';
 
-export default function AdminSuportePage() {
+export default function AdminDashboard() {
   const router = useRouter();
-  const [view, setView] = useState<'lista' | 'chat'>('lista');
-  const [selectedTicket, setSelectedTicket] = useState<any>(null);
-  const [tickets, setTickets] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [adminName, setAdminName] = useState('');
 
-  // Recupera o Token salvo no login para usar nas chamadas
-  const token = typeof window !== 'undefined' ? localStorage.getItem('admin_token') : null;
+  useEffect(() => {
+    // 1. Busca o token e o nome salvos no login
+    const token = localStorage.getItem('admin_token');
+    const name = localStorage.getItem('admin_name');
 
-  // 1. Função para carregar todos os tickets do sistema
-  const fetchAllTickets = async () => {
+    // 2. Proteção de Rota: Se não houver token, volta para o login
     if (!token) {
       router.push('/42/login');
       return;
     }
-    setLoading(true);
-    try {
-      const res = await fetch('https://serverless-tau-green.vercel.app/customer-service/42/tickets/list_all', {
-        method: 'GET',
-        headers: { 
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setTickets(data);
-      } else {
-        // Se o token expirou ou for inválido, volta para o login
-        router.push('/42/login');
-      }
-    } catch (err) {
-      console.error("Erro ao carregar tickets:", err);
-    } finally {
-      setLoading(false);
+
+    setAdminName(name || 'Administrador');
+  }, [router]);
+
+  const menuItems = [
+    {
+      title: 'Suporte / Tickets',
+      desc: 'Responder chamados e gerenciar conversas',
+      icon: '💬',
+      path: '/42/suporte',
+      color: 'bg-orange-500'
+    },
+    {
+      title: 'Certificados',
+      desc: 'Cadastrar e excluir certificados de alunos',
+      icon: '🎓',
+      path: '/42/atendimento/certificados',
+      color: 'bg-blue-600'
+    },
+    {
+      title: 'Financeiro / Boletos',
+      desc: 'Gerenciar faturas e status de pagamento',
+      icon: '💰',
+      path: '/42/atendimento/financeiro',
+      color: 'bg-green-600'
+    },
+    {
+      title: 'Documentos',
+      desc: 'Upload de declarações e documentos gerais',
+      icon: '📁',
+      path: '/42/atendimento/documentos',
+      color: 'bg-slate-700'
     }
-  };
-
-  useEffect(() => {
-    fetchAllTickets();
-  }, []);
-
-  // 2. Função para o Admin enviar uma resposta
-  const handleAdminReply = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const input = (e.target as any).message;
-    const content = input.value;
-
-    try {
-      const res = await fetch('https://serverless-tau-green.vercel.app/customer-service/42/tickets/reply', {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ ticket_id: selectedTicket.id, content })
-      });
-
-      if (res.ok) {
-        input.value = '';
-        // Atualiza a lista geral e o ticket selecionado para mostrar a nova mensagem
-        await fetchAllTickets();
-        // Opcional: recarregar o selectedTicket aqui se necessário
-      }
-    } catch (err) {
-      alert("Erro ao enviar resposta.");
-    }
-  };
+  ];
 
   return (
-    <main className="min-h-screen pt-10 bg-slate-100 p-4">
-      <div className="max-w-6xl mx-auto">
-        <header className="mb-8 flex justify-between items-center">
+    <main className="min-h-screen pt-10 bg-slate-100 py-20">
+      {/* Header Adm */}
+      <div className="bg-[#003366] text-white py-20 px-6">
+        <div className="max-w-6xl mx-auto flex justify-between items-end">
           <div>
-            <h1 className="text-2xl font-black text-slate-800 uppercase tracking-tighter">Central de Chamados</h1>
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Painel 42 • Gestão de Alunos</p>
+            <p className="text-orange-400 font-bold text-xs uppercase tracking-widest">Painel de Controle</p>
+            <h1 className="text-3xl font-black italic">Olá, {adminName}</h1>
           </div>
-          {view === 'chat' && (
-            <button 
-              onClick={() => setView('lista')} 
-              className="bg-slate-200 px-4 py-2 rounded-lg font-bold text-[10px] uppercase hover:bg-slate-300 transition"
+          <button 
+            onClick={() => { 
+              // Limpa tudo ao sair
+              localStorage.removeItem('admin_token');
+              localStorage.removeItem('admin_name');
+              router.push('/42/login'); 
+            }}
+            className="text-xs bg-red-500/20 hover:bg-red-500 px-4 py-2 rounded font-bold transition"
+          >
+            Sair do Sistema
+          </button>
+        </div>
+      </div>
+
+      {/* Grid de Ações */}
+      <div className="max-w-6xl mx-auto px-6 -mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {menuItems.map((item, idx) => (
+            <button
+              key={idx}
+              onClick={() => router.push(item.path)}
+              className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-start text-left hover:shadow-xl hover:-translate-y-1 transition-all group"
             >
-              Voltar à Lista
+              <div className={`${item.color} w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4 shadow-lg group-hover:scale-110 transition`}>
+                {item.icon}
+              </div>
+              <h3 className="font-bold text-[#003366] text-lg">{item.title}</h3>
+              <p className="text-gray-500 text-xs mt-1 leading-relaxed">{item.desc}</p>
+              <div className="mt-6 text-[10px] font-black text-gray-300 group-hover:text-orange-500 transition uppercase">
+                Acessar Módulo ➔
+              </div>
             </button>
-          )}
-        </header>
+          ))}
+        </div>
 
-        {/* LISTA DE TICKETS */}
-        {view === 'lista' && (
-          <div className="bg-white rounded-2xl shadow-sm overflow-hidden border border-slate-200">
-            <table className="w-full text-left border-collapse">
-              <thead className="bg-slate-50 border-b border-slate-200">
-                <tr>
-                  <th className="p-4 text-[10px] font-black text-slate-400 uppercase">Aluno</th>
-                  <th className="p-4 text-[10px] font-black text-slate-400 uppercase">Assunto</th>
-                  <th className="p-4 text-[10px] font-black text-slate-400 uppercase text-center">Status</th>
-                  <th className="p-4 text-[10px] font-black text-slate-400 uppercase text-right">Ação</th>
-                </tr>
-              </thead>
-              <tbody>
-                {loading ? (
-                  <tr><td colSpan={4} className="p-10 text-center text-slate-400 font-bold animate-pulse">CARREGANDO CHAMADOS...</td></tr>
-                ) : tickets.map((ticket) => (
-                  <tr key={ticket.id} className="border-b last:border-0 hover:bg-slate-50 transition">
-                    <td className="p-4">
-                      <p className="font-bold text-sm text-slate-700">{ticket.student_name}</p>
-                      <p className="text-[10px] text-slate-400 font-mono">RA: {ticket.student_ra}</p>
-                    </td>
-                    <td className="p-4">
-                      <p className="font-medium text-sm text-slate-600 leading-tight">{ticket.title}</p>
-                      <p className="text-[10px] text-orange-500 font-bold uppercase tracking-tighter">{ticket.category}</p>
-                    </td>
-                    <td className="p-4 text-center">
-                      <span className={`text-[9px] font-black px-2 py-1 rounded-full uppercase ${ticket.status === 'Aberto' ? 'bg-orange-100 text-orange-600' : 'bg-green-100 text-green-600'}`}>
-                        {ticket.status}
-                      </span>
-                    </td>
-                    <td className="p-4 text-right">
-                      <button 
-                        onClick={() => { setSelectedTicket(ticket); setView('chat'); }}
-                        className="bg-[#003366] text-white px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase hover:bg-black transition"
-                      >
-                        Atender
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        {/* Status Rápido - No futuro você fará um fetch aqui para dados reais */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white p-6 rounded-2xl border border-slate-200">
+            <h4 className="text-gray-400 font-bold text-[10px] uppercase">Chamados em Aberto</h4>
+            <p className="text-3xl font-black text-[#003366]">12</p>
           </div>
-        )}
-
-        {/* INTERFACE DE CHAT (RESPOSTA) */}
-        {view === 'chat' && selectedTicket && (
-          <div className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden flex flex-col h-[650px] animate-in fade-in duration-300">
-            <div className="bg-slate-900 p-5 text-white">
-              <h3 className="font-bold text-lg">{selectedTicket.student_name}</h3>
-              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest italic">{selectedTicket.title}</p>
-            </div>
-            
-            <div className="flex-1 p-6 overflow-y-auto bg-[#f8fafc] flex flex-col gap-6">
-              {selectedTicket.messages?.map((msg: any, i: number) => {
-                // Lógica: se o sender_id for diferente do suporte (ex: 999), é aluno
-                const isStudent = msg.sender_id !== 999; 
-                return (
-                  <div key={i} className={`max-w-[75%] ${isStudent ? 'self-start' : 'self-end'}`}>
-                    <div className={`p-4 rounded-2xl text-sm shadow-sm ${
-                      isStudent 
-                        ? 'bg-white border border-slate-200 text-slate-700 rounded-tl-none' 
-                        : 'bg-[#003366] text-white rounded-tr-none'
-                    }`}>
-                      {msg.content}
-                    </div>
-                    <p className={`text-[9px] mt-2 font-bold text-slate-400 uppercase ${isStudent ? '' : 'text-right'}`}>
-                      {isStudent ? 'Mensagem do Aluno' : 'Resposta Suporte'} • {new Date(msg.date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-
-            <form onSubmit={handleAdminReply} className="p-4 border-t bg-white flex gap-2">
-              <input 
-                name="message" 
-                type="text" 
-                placeholder="Digite a resposta oficial da Afulink..." 
-                className="flex-1 border-2 border-slate-100 rounded-xl px-4 py-3 text-sm outline-none focus:border-orange-500 transition-all" 
-                required 
-              />
-              <button 
-                type="submit" 
-                className="bg-orange-500 text-white px-8 py-2 rounded-xl font-bold text-xs uppercase hover:bg-slate-800 transition-all shadow-lg"
-              >
-                Enviar
-              </button>
-            </form>
+          <div className="bg-white p-6 rounded-2xl border border-slate-200">
+            <h4 className="text-gray-400 font-bold text-[10px] uppercase">Certificados Emitidos (Mês)</h4>
+            <p className="text-3xl font-black text-[#003366]">154</p>
           </div>
-        )}
+          <div className="bg-white p-6 rounded-2xl border border-slate-200">
+            <h4 className="text-gray-400 font-bold text-[10px] uppercase">Boletos Vencendo Hoje</h4>
+            <p className="text-3xl font-black text-orange-500">5</p>
+          </div>
+        </div>
       </div>
     </main>
   );
