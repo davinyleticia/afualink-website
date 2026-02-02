@@ -8,7 +8,7 @@ export default function AdminFinanceiro() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [invoices, setInvoices] = useState<any[]>([]);
-  const [form, setForm] = useState({ ra_aluno: '', description: '', amount: '', due_date: '', payment_link: '', status: 'Pendente' });
+  const [form, setForm] = useState({ ra_aluno: '',course_name: 'Administrativo', description: '', amount: '', due_date: '', payment_link: '', status: 'Pendente' });
 
   const token = typeof window !== 'undefined' ? localStorage.getItem('admin_token') : null;
 
@@ -40,7 +40,7 @@ export default function AdminFinanceiro() {
       body: JSON.stringify(form)
     });
     if (res.ok) {
-      setForm({ ra_aluno: '', description: '', amount: '', due_date: '', payment_link: '', status: 'Pendente' });
+      setForm({ ra_aluno: '', description: '', amount: '', due_date: '', payment_link: '', status: 'Pendente', course_name: 'Administrativo' });
       fetchInvoices();
     }
     setLoading(false);
