@@ -148,7 +148,7 @@ export default function AdminSuportePage() {
             <div className="flex-1 p-6 overflow-y-auto bg-[#f8fafc] flex flex-col gap-6">
               {selectedTicket.messages?.map((msg: any, i: number) => {
                 // Lógica: se o sender_id for diferente do suporte (ex: 999), é aluno
-                const isStudent = msg.sender_id !== selectedTicket.user_id;
+                const isStudent = msg.sender_id === tickets.find(t => t.id === selectedTicket.id)?.my_id;
                 return (
                   <div key={i} className={`max-w-[75%] ${isStudent ? 'self-start' : 'self-end'}`}>
                     <div className={`p-4 rounded-2xl text-sm shadow-sm ${
