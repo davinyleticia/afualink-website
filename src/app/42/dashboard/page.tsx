@@ -50,7 +50,11 @@ export default function AdminDashboard() {
     { title: 'Suporte / Tickets', desc: 'Responder chamados', icon: '💬', path: '/42/suporte', color: 'bg-orange-500' },
     { title: 'Certificados', desc: 'Gerenciar certificados', icon: '🎓', path: '/42/atendimento/certificados', color: 'bg-blue-600' },
     { title: 'Financeiro', desc: 'Status de pagamento', icon: '💰', path: '/42/atendimento/financeiro', color: 'bg-green-600' },
-    { title: 'Documentos', desc: 'Upload de declarações', icon: '📁', path: '/42/atendimento/documentos', color: 'bg-slate-700' }
+    { title: 'Documentos', desc: 'Upload de declarações', icon: '📁', path: '/42/atendimento/documentos', color: 'bg-slate-700' },
+    { title: 'Mensageria', desc: 'Upload de declarações', icon: '✉️', path: '/42/atendimento/documentos', color: 'bg-slate-700' },
+    { title: 'Cadastrar Biolink', desc: 'Upload de declarações', icon: '🔗', path: '/42/atendimento/documentos', color: 'bg-slate-700' },
+    { title: 'Curso', desc: 'Upload de declarações', icon: '🎓', path: '/42/atendimento/documentos', color: 'bg-slate-700' },
+    { title: 'Ementa', desc: 'Upload de declarações', icon: '📋', path: '/42/atendimento/documentos', color: 'bg-slate-700' }
   ];
 
   if (loading) return <div className="min-h-screen flex items-center justify-center bg-slate-100 font-bold text-slate-400">CARREGANDO PAINEL...</div>;
