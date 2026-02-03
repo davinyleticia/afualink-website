@@ -51,10 +51,10 @@ export default function AdminDashboard() {
     { title: 'Certificados', desc: 'Gerenciar certificados', icon: '🎓', path: '/42/atendimento/certificados', color: 'bg-blue-600' },
     { title: 'Financeiro', desc: 'Status de pagamento', icon: '💰', path: '/42/atendimento/financeiro', color: 'bg-green-600' },
     { title: 'Documentos', desc: 'Upload de declarações', icon: '📁', path: '/42/atendimento/documentos', color: 'bg-slate-700' },
-    { title: 'Mensageria', desc: 'Upload de declarações', icon: '✉️', path: '/42/atendimento/documentos', color: 'bg-slate-700' },
-    { title: 'Cadastrar Biolink', desc: 'Upload de declarações', icon: '🔗', path: '/42/atendimento/documentos', color: 'bg-slate-700' },
-    { title: 'Curso', desc: 'Upload de declarações', icon: '🎓', path: '/42/atendimento/documentos', color: 'bg-slate-700' },
-    { title: 'Ementa', desc: 'Upload de declarações', icon: '📋', path: '/42/atendimento/documentos', color: 'bg-slate-700' }
+    { title: 'Mensageria', desc: 'Enviar mensagens', icon: '✉️', path: '/42/atendimento/documentos', color: 'bg-blue-700' },
+    { title: 'Cadastrar Biolink', desc: 'Cadastrar biolink', icon: '🔗', path: '/42/atendimento/documentos', color: 'bg-gray-700' },
+    { title: 'Curso', desc: 'Cadastrar curso', icon: '🎓', path: '/42/atendimento/documentos', color: 'bg-slate-700' },
+    { title: 'Ementa', desc: 'Cadastrar ementa', icon: '📋', path: '/42/atendimento/documentos', color: 'bg-blue-700' }
   ];
 
   if (loading) return <div className="min-h-screen flex items-center justify-center bg-slate-100 font-bold text-slate-400">CARREGANDO PAINEL...</div>;
