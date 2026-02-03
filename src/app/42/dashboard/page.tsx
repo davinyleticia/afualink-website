@@ -52,8 +52,8 @@ export default function AdminDashboard() {
     { title: 'Financeiro', desc: 'Status de pagamento', icon: '💰', path: '/42/atendimento/financeiro', color: 'bg-green-600' },
     { title: 'Documentos', desc: 'Upload de declarações', icon: '📁', path: '/42/atendimento/documentos', color: 'bg-slate-700' },
     { title: 'Mensageria', desc: 'Enviar mensagens', icon: '✉️', path: '/42/atendimento/documentos', color: 'bg-blue-700' },
-    { title: 'Cadastrar Biolink', desc: 'Cadastrar biolink', icon: '🔗', path: '/42/atendimento/documentos', color: 'bg-gray-700' },
-    { title: 'Curso', desc: 'Cadastrar curso', icon: '🎓', path: '/42/atendimento/documentos', color: 'bg-slate-700' },
+    { title: 'Cadastrar Biolink', desc: 'Cadastrar biolink', icon: '🔗', path: '/42/atendimento/documentos', color: 'bg-gray-100' },
+    { title: 'Curso', desc: 'Cadastrar curso', icon: '🎓', path: '/42/atendimento/documentos', color: 'bg-slate-100' },
     { title: 'Ementa', desc: 'Cadastrar ementa', icon: '📋', path: '/42/atendimento/documentos', color: 'bg-blue-700' }
   ];
 
