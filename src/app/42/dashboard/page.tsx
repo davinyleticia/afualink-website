@@ -56,7 +56,7 @@ export default function AdminDashboard() {
   if (loading) return <div className="min-h-screen flex items-center justify-center bg-slate-100 font-bold text-slate-400">CARREGANDO PAINEL...</div>;
 
   return (
-    <main className="min-h-screen pt-34 bg-slate-50">
+    <main className="min-h-screen pt-4 bg-slate-50">
       {/* Header Adm */}
       <div className="bg-[#003366] text-white py-16 px-6 pt-24">
         <div className="max-w-6xl mx-auto flex justify-between items-end">
