@@ -37,10 +37,10 @@ const Footer = () => {
             </div>
             <div className={styles.linkColumn}>
               <h4>Rede Sociais</h4>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><FaInstagram /> Instagram</a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"><FaLinkedin /> LinkedIn</a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"><FaYoutube /> YouTube</a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer"><FaGithub /> Github</a>
+              <a href="https://instagram.com/canalafulink" target="_blank" rel="noopener noreferrer"><FaInstagram /> Instagram</a>
+              <a href="https://linkedin.com/in/afulink" target="_blank" rel="noopener noreferrer"><FaLinkedin /> LinkedIn</a>
+              <a href="https://youtube.com/@afulink" target="_blank" rel="noopener noreferrer"><FaYoutube /> YouTube</a>
+              <a href="https://github.com/afulink" target="_blank" rel="noopener noreferrer"><FaGithub /> Github</a>
             </div>
           </div>
         </div>
