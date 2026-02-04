@@ -124,7 +124,7 @@ const SobrePage = () => {
           <div className="relative">
             <div className="bg-white p-4 rounded-3xl shadow-2xl rotate-3">
               <div className="bg-slate-200 aspect-video rounded-2xl flex items-center justify-center italic text-gray-400">
-                Espaço para imagem de equipe/escritório
+                <img src="/img/image.png" alt="Equipe Diversa" className="rounded-2xl object-cover w-full h-full" />
               </div>
             </div>
             <div className="absolute -bottom-6 -left-6 bg-[#f37021] text-white p-6 rounded-2xl shadow-xl hidden md:block">
