@@ -17,7 +17,7 @@
 .button.secondary {
   background-color: #ffffff;
   color: #0c0000;
-  border: 2px solid #fff;
+  border: 2px solid #000000;
 }
 
 .button.primary:hover {

@@ -14,7 +14,8 @@ const Footer = () => {
             <div className={styles.legal}>
               <Link href="/termos">Termo de Uso</Link> | <Link href="/privacidade">Privacidade</Link>
             </div>
-            <p className={styles.trademark}>Trademark Afulink® 2021 - 2026</p>
+            <p className={styles.trademark}>Afulink Educação, Tecnologia e Inovação Ltda</p>
+            <p className={styles.trademark}><strong>Trademark Afulink® 2021 - 2026</strong></p>
           </div>
 
           {/* Colunas de Links */}

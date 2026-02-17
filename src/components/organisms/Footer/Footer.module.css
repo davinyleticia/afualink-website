@@ -32,7 +32,9 @@
   color: #555;
   text-decoration: none;
 }
-
+.legal a:hover {
+  color: #a59b9f;
+}
 .trademark {
   margin-top: 0.5rem;
   font-size: 0.8rem;
