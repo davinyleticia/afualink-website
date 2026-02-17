@@ -20,32 +20,32 @@ const Footer = () => {
           <div className={styles.linksGrid}>
             <div className={styles.linkColumn}>
               <h4>Empresa</h4>
-              <Link href="/sobre">Sobre</Link>
-              <Link href="/carreira">Carreira</Link>
-              <Link href="/contato">Contato</Link>
+              <Link href="https://afulink.com//sobre">Sobre</Link>
+              <Link href="https://afulink.com//carreira">Carreira</Link>
+              <Link href="https://afulink.com//contato">Contato</Link>
             </div>
             <div className={styles.linkColumn}>
               <h4>Produtos</h4>
-              <Link href="produto/biolink">Biolink</Link>
-              <Link href="produto/cms">CMS</Link>
-              <Link href="produto/arquivme">Arquivme</Link>
-              <Link href="produto/treinamento">Treinamento</Link>
-              <Link href="produto/consultoria">Consultoria</Link>
+              <Link href="https://afulink.com/produtos/biolink">Biolink</Link>
+              <Link href="https://afulink.com/produtos/cms">CMS</Link>
+              <Link href="https://afulink.com/produtos/arquivme">Arquivme</Link>
+              <Link href="https://afulink.com/produtos/treinamento">Treinamento</Link>
+              <Link href="https://afulink.com/produtos/consultoria">Consultoria</Link>
             </div>
             <div className={styles.linkColumn}>
               <h4>Treinamentos</h4>
-              <Link href="treinamento/Fundamentos-Digitais-para-Empresas">Fundamentos Digitais para Empresas</Link>
-              <Link href="treinamento/Desenvolvimento-Python">Desenvolvimento Python</Link>
+              <Link href="https://afulink.com/treinamento/Fundamentos-Digitais-para-Empresas">Fundamentos Digitais para Empresas</Link>
+              <Link href="https://afulink.com/treinamento/Desenvolvimento-Python">Desenvolvimento Python</Link>
             </div>
             <div className={styles.linkColumn}>
               <h4>Informações</h4>
               <Link href="https://docs.afu.link">Documentação</Link>
-              <Link href="/atendimento/?section=validar-certificado">Validar Certificado</Link>
+              <Link href="https://afulink.com/atendimento/?section=validar-certificado">Validar Certificado</Link>
             </div>
             <div className={styles.linkColumn}>
               <h4>Minha Conta</h4>
-              <Link href="/atendimento">Serviços de Atendimento</Link>
-              <Link href="/atendimento/suporte">Suporte / Ticket</Link>
+              <Link href="https://afulink.com/atendimento">Serviços de Atendimento</Link>
+              <Link href="https://afulink.com/atendimento/suporte">Suporte / Ticket</Link>
             </div>
             <div className={styles.linkColumn}>
               <h4>Rede Sociais</h4>
