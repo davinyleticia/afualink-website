@@ -190,9 +190,9 @@ const ProductPage = () => {
               Junte-se a dezenas de empresas que já otimizaram seus resultados com a {product.title}.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4 w-full max-w-md mx-auto">
               <div className="flex justify-center">
-                <div className="flex items-center bg-white rounded-md overflow-hidden shadow-md w-full max-w-md">
+                <div className="flex items-center bg-white rounded-md overflow-hidden shadow-md w-full max-w-full">
 
                   <span className="px-3 text-gray-500 border-r border-gray-300">
                     Visite.la/
@@ -205,9 +205,9 @@ const ProductPage = () => {
                   />
 
                   <button
-                    className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 font-semibold transition"
+                    className=" bg-red-500 hover:bg-red-600 text-white px-6 py-2 font-semibold transition"
                   >
-                    Venha falar com especialista
+                    Fale com especialista
                   </button>
 
                 </div>
