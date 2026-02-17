@@ -92,7 +92,7 @@ export default function AdminDashboard() {
         {/* STATUS REAL VINDO DA API */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
-            <h4 className="text-gray-400 font-black text-[9px] uppercase tracking-widest">Total de Alunos</h4>
+            <h4 className="text-gray-400 font-black text-[9px] uppercase tracking-widest">Total de Cliente</h4>
             <p className="text-4xl font-black text-[#003366] mt-2">{stats?.total_users}</p>
           </div>
           <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
