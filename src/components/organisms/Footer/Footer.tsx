@@ -29,7 +29,7 @@ const Footer = () => {
               <Link href="https://afulink.com/produtos/biolink">Biolink</Link>
               <Link href="https://afulink.com/produtos/cms">CMS</Link>
               <Link href="https://afulink.com/produtos/arquivme">Arquivme</Link>
-              <Link href="https://afulink.com/produtos/treinamento">Treinamento</Link>
+              <Link href="https://afulink.com/produtos/treinamento">Treinamento B2B</Link>
               <Link href="https://afulink.com/produtos/consultoria">Consultoria</Link>
             </div>
             <div className={styles.linkColumn}>
