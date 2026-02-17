@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { Search, ChevronLeft, ChevronRight, DollarSign, ArrowLeft, Trash2, Loader2, Save, TrendingDown, TrendingUp, Edit2, X } from 'lucide-react';
+import { Search, ChevronLeft, ChevronRight, DollarSign, ArrowLeft, Trash2, Loader2, Save, TrendingDown, TrendingUp, Edit2, X, Calendar, Link as LinkIcon, ExternalLink } from 'lucide-react';
 
 export default function AdminFinanceiro() {
   const router = useRouter();
@@ -18,9 +18,13 @@ export default function AdminFinanceiro() {
   const [editingId, setEditingId] = useState<number | null>(null);
   const [form, setForm] = useState({ 
     ra_aluno: '', 
+    course_name: 'Geral', // Valor padrão para evitar Null no Banco
     amount: '', 
     transaction_type: 'debit', 
-    description: '' 
+    description: '',
+    due_date: '',
+    file_path: '', // Inicializado como string vazia
+    status: 'Pendente'
   });
 
   const token = typeof window !== 'undefined' ? localStorage.getItem('admin_token') : null;
@@ -47,10 +51,18 @@ export default function AdminFinanceiro() {
 
   useEffect(() => { if (token) fetchInvoices(); }, [fetchInvoices]);
 
-  // --- SUBMIT: ADD OU UPDATE ---
+  // --- SUBMIT: ADD OU UPDATE (COM FIX PARA NULL) ---
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
+    // FIX: Garante que campos opcionais não enviem NULL para o banco
+    const payload = {
+      ...form,
+      file_path: form.file_path || "S/N", // Envia "S/N" ou string vazia se nulo
+      course_name: form.course_name || "Administrativo"
+    };
+
     const method = editingId ? 'PUT' : 'POST';
     const url = editingId ? `${API_BASE}/update/${editingId}` : `${API_BASE}/add`;
 
@@ -58,17 +70,18 @@ export default function AdminFinanceiro() {
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-        body: JSON.stringify(form)
+        body: JSON.stringify(payload)
       });
+      
       if (res.ok) {
         cancelEditing();
         fetchInvoices();
       } else {
         const err = await res.json();
-        alert(err.message || "Erro na operação");
+        alert(`Erro: ${err.error || err.message}`);
       }
-    } catch (err) {
-      alert("Erro de conexão");
+    } catch (error) {
+      alert("Erro de conexão com o servidor");
     } finally {
       setLoading(false);
     }
@@ -93,20 +106,24 @@ export default function AdminFinanceiro() {
     setEditingId(inv.id);
     setForm({
       ra_aluno: inv.student_ra.toString(),
+      course_name: inv.course_name || 'Geral',
       amount: inv.amount.toString(),
-      transaction_type: inv.transaction_type,
-      description: inv.description
+      transaction_type: inv.transaction_type || 'debit',
+      description: inv.description,
+      due_date: inv.due_date ? inv.due_date.split('T')[0] : '',
+      file_path: inv.file_path || '',
+      status: inv.status || 'Pendente'
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const cancelEditing = () => {
     setEditingId(null);
-    setForm({ ra_aluno: '', amount: '', transaction_type: 'debit', description: '' });
+    setForm({ ra_aluno: '', course_name: 'Geral', amount: '', transaction_type: 'debit', description: '', due_date: '', file_path: '', status: 'Pendente' });
   };
 
   return (
-<main className="min-h-screen pt-28 bg-slate-50 selection:bg-orange-500">
+    <main className="min-h-screen pt-28 bg-slate-50 pb-20 selection:bg-green-500">
       <div className="max-w-[1400px] mx-auto px-4 space-y-8">
         
         <button onClick={() => router.push('/42/dashboard')} className="flex items-center gap-2 text-[10px] font-black text-slate-400 mb-8 uppercase tracking-widest hover:text-green-700 transition-all">
@@ -115,7 +132,7 @@ export default function AdminFinanceiro() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
-          {/* COLUNA 1: FORMULÁRIO (ADD/EDIT) */}
+          {/* COLUNA 1: FORMULÁRIO */}
           <div className="lg:col-span-4">
             <div className="bg-white rounded-[2.5rem] shadow-xl border border-slate-200 overflow-hidden sticky top-28">
               <div className={`p-6 text-white text-center transition-colors duration-500 ${editingId ? 'bg-[#003366]' : 'bg-green-700'}`}>
@@ -127,26 +144,32 @@ export default function AdminFinanceiro() {
               
               <form onSubmit={handleSubmit} className="p-8 space-y-5">
                 <div>
-                  <label className="text-[10px] font-black uppercase text-slate-400 ml-2">RA do Aluno</label>
+                  <label className="text-[10px] font-black uppercase text-slate-400 ml-2 tracking-widest">RA do Aluno</label>
                   <input type="text" required className="w-full mt-2 p-4 bg-slate-50 border-2 border-transparent focus:border-green-600 outline-none rounded-2xl text-sm font-bold shadow-inner" value={form.ra_aluno} onChange={e => setForm({...form, ra_aluno: e.target.value})} />
                 </div>
 
-                <div>
-                  <label className="text-[10px] font-black uppercase text-slate-400 ml-2">Valor (R$)</label>
-                  <input type="number" step="0.01" required className="w-full mt-2 p-4 bg-slate-50 border-2 border-transparent focus:border-green-600 outline-none rounded-2xl text-sm font-bold shadow-inner" value={form.amount} onChange={e => setForm({...form, amount: e.target.value})} />
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-[10px] font-black uppercase text-slate-400 ml-2 tracking-widest">Valor (R$)</label>
+                    <input type="number" step="0.01" required className="w-full mt-2 p-4 bg-slate-50 rounded-2xl text-sm font-bold border-none shadow-inner" value={form.amount} onChange={e => setForm({...form, amount: e.target.value})} />
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-black uppercase text-slate-400 ml-2 tracking-widest">Vencimento</label>
+                    <input type="date" required className="w-full mt-2 p-4 bg-slate-50 rounded-2xl text-sm font-bold border-none shadow-inner" value={form.due_date} onChange={e => setForm({...form, due_date: e.target.value})} />
+                  </div>
                 </div>
 
                 <div>
-                  <label className="text-[10px] font-black uppercase text-slate-400 ml-2">Tipo</label>
-                  <select className="w-full mt-2 p-4 bg-slate-50 border-2 border-transparent focus:border-green-600 outline-none rounded-2xl text-sm font-bold shadow-inner appearance-none" value={form.transaction_type} onChange={e => setForm({...form, transaction_type: e.target.value})}>
-                    <option value="debit">Débito (Cobrança)</option>
-                    <option value="credit">Crédito (Pagamento)</option>
-                  </select>
+                  <label className="text-[10px] font-black uppercase text-slate-400 ml-2 tracking-widest">Link / Comprovante</label>
+                  <div className="relative">
+                    <LinkIcon className="absolute left-4 top-4 text-slate-300" size={16} />
+                    <input type="text" placeholder="URL opcional" className="w-full mt-2 pl-12 p-4 bg-slate-50 rounded-2xl text-sm border-none shadow-inner" value={form.file_path} onChange={e => setForm({...form, file_path: e.target.value})} />
+                  </div>
                 </div>
 
                 <div>
-                  <label className="text-[10px] font-black uppercase text-slate-400 ml-2">Descrição</label>
-                  <textarea required className="w-full mt-2 p-4 bg-slate-50 border-2 border-transparent focus:border-green-600 outline-none rounded-2xl text-sm h-24 resize-none shadow-inner" value={form.description} onChange={e => setForm({...form, description: e.target.value})} />
+                  <label className="text-[10px] font-black uppercase text-slate-400 ml-2 tracking-widest">Descrição</label>
+                  <textarea required className="w-full mt-2 p-4 bg-slate-50 rounded-2xl text-sm h-24 resize-none shadow-inner leading-relaxed" value={form.description} onChange={e => setForm({...form, description: e.target.value})} />
                 </div>
 
                 <div className="flex gap-3">
@@ -156,7 +179,7 @@ export default function AdminFinanceiro() {
                     </button>
                   )}
                   <button type="submit" disabled={loading} className={`flex-[3] text-white font-black py-4 rounded-2xl uppercase text-[10px] tracking-widest shadow-xl transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2 ${editingId ? 'bg-[#003366]' : 'bg-green-700'}`}>
-                    <Save size={18} /> {editingId ? 'Atualizar' : 'Registrar'}
+                    <Save size={18} /> {loading ? 'Gravando...' : editingId ? 'Atualizar' : 'Confirmar'}
                   </button>
                 </div>
               </form>
@@ -167,12 +190,12 @@ export default function AdminFinanceiro() {
           <div className="lg:col-span-8 space-y-6">
             <div className="relative group">
               <Search className="absolute left-6 top-5 text-slate-300 group-focus-within:text-green-600 transition-colors" size={20} />
-              <input type="text" placeholder="Pesquisar por RA ou Aluno..." className="w-full pl-16 pr-8 py-5 bg-white rounded-[2.5rem] border border-slate-200 shadow-sm outline-none focus:ring-2 ring-green-500 transition-all text-sm font-medium" value={searchTerm} onChange={(e) => { setSearchTerm(e.target.value); setPage(1); }} />
+              <input type="text" placeholder="Pesquisar por RA ou Nome do Aluno..." className="w-full pl-16 pr-8 py-5 bg-white rounded-[2.5rem] border border-slate-200 shadow-sm outline-none focus:ring-2 ring-green-500 transition-all text-sm font-medium" value={searchTerm} onChange={(e) => { setSearchTerm(e.target.value); setPage(1); }} />
             </div>
 
             <div className="bg-white rounded-[3rem] shadow-xl border border-slate-200 overflow-hidden">
               <table className="w-full text-left">
-                <thead className="bg-slate-50 border-b">
+                <thead className="bg-slate-50 border-b border-slate-100">
                   <tr>
                     <th className="p-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Aluno / RA</th>
                     <th className="p-6 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">Tipo</th>
@@ -182,40 +205,60 @@ export default function AdminFinanceiro() {
                 <tbody className="divide-y divide-slate-50">
                   {loading ? (
                     <tr><td colSpan={3} className="p-20 text-center"><Loader2 className="animate-spin mx-auto text-green-600" size={40} /></td></tr>
-                  ) : invoices.map((inv) => (
-                    <tr key={inv.id} className="hover:bg-slate-50/80 transition-all group">
-                      <td className="p-6">
-                        <p className="font-black text-[#003366] uppercase text-sm italic">{inv.student_name}</p>
-                        <p className="text-[10px] font-mono text-slate-400">RA: {inv.student_ra}</p>
-                        <p className="text-[10px] text-slate-500 mt-1 font-medium">{inv.description}</p>
-                      </td>
-                      <td className="p-6 text-center">
-                        <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest ${inv.transaction_type === 'credit' ? 'bg-blue-100 text-blue-600' : 'bg-red-100 text-red-600'}`}>
-                          {inv.transaction_type === 'credit' ? <TrendingUp size={12}/> : <TrendingDown size={12}/>}
-                          {inv.transaction_type === 'credit' ? 'Crédito' : 'Débito'}
-                        </div>
-                      </td>
-                      <td className="p-6 text-right space-x-2 whitespace-nowrap">
-                        <div className="mb-2">
-                           <p className={`font-black text-sm italic ${inv.transaction_type === 'credit' ? 'text-blue-600' : 'text-slate-800'}`}>
-                             R$ {Number(inv.amount).toLocaleString('pt-BR', {minimumFractionDigits: 2})}
-                           </p>
-                           <p className="text-[9px] text-slate-400 uppercase font-black">{new Date(inv.transaction_date).toLocaleDateString()}</p>
-                        </div>
-                        <button onClick={() => startEditing(inv)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-[#003366] hover:text-white transition-all shadow-sm"><Edit2 size={16} /></button>
-                        <button onClick={() => handleDelete(inv.id, inv.description)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-500 hover:text-white transition-all shadow-sm"><Trash2 size={16} /></button>
-                      </td>
-                    </tr>
-                  ))}
+                  ) : invoices.length > 0 ? (
+                    invoices.map((inv) => (
+                      <tr key={inv.id} className="hover:bg-slate-50/80 transition-all group">
+                        <td className="p-6">
+                          <p className="font-black text-[#003366] uppercase text-sm italic">{inv.student_name}</p>
+                          <p className="text-[10px] font-mono text-slate-400 italic">RA: {inv.student_ra}</p>
+                          <p className="text-[10px] text-slate-500 mt-1 font-medium">{inv.description}</p>
+                        </td>
+                        <td className="p-6 text-center">
+                          <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest shadow-sm ${inv.transaction_type === 'credit' ? 'bg-blue-100 text-blue-600' : 'bg-red-100 text-red-600'}`}>
+                            {inv.transaction_type === 'credit' ? <TrendingUp size={12}/> : <TrendingDown size={12}/>}
+                            {inv.transaction_type === 'credit' ? 'Crédito' : 'Débito'}
+                          </div>
+                        </td>
+                        <td className="p-6 text-right space-x-2 whitespace-nowrap">
+                          <div className="mb-2">
+                             <p className={`font-black text-sm italic ${inv.transaction_type === 'credit' ? 'text-blue-600' : 'text-slate-800'}`}>
+                               R$ {Number(inv.amount).toLocaleString('pt-BR', {minimumFractionDigits: 2})}
+                             </p>
+                             <div className="flex flex-col items-end gap-1">
+                               <p className="text-[9px] text-slate-400 uppercase font-black">Venc: {inv.due_date ? new Date(inv.due_date).toLocaleDateString() : '--'}</p>
+                               <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded ${inv.status === 'Pago' ? 'bg-green-100 text-green-600' : 'bg-orange-100 text-orange-600'}`}>
+                                 {inv.status}
+                               </span>
+                             </div>
+                          </div>
+                          <div className="flex justify-end gap-2">
+                            {inv.file_path && inv.file_path !== "S/N" && (
+                              <a href={inv.file_path} target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-100 text-slate-600 rounded-xl hover:bg-orange-500 hover:text-white transition-all shadow-sm">
+                                <ExternalLink size={16} />
+                              </a>
+                            )}
+                            <button onClick={() => startEditing(inv)} className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-[#003366] hover:text-white transition-all shadow-sm"><Edit2 size={16} /></button>
+                            <button onClick={() => handleDelete(inv.id, inv.description)} className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-500 hover:text-white transition-all shadow-sm"><Trash2 size={16} /></button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr><td colSpan={3} className="p-20 text-center text-slate-400 font-bold uppercase text-[10px]">Nenhum lançamento encontrado.</td></tr>
+                  )}
                 </tbody>
               </table>
 
               {/* PAGINAÇÃO */}
-              <div className="bg-slate-50 p-6 flex justify-between items-center">
-                <span className="text-[10px] font-black text-slate-400 tracking-widest ml-4">Página {page} de {totalPages}</span>
+              <div className="bg-slate-50 p-6 flex justify-between items-center border-t border-slate-100">
+                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-4">Página {page} de {totalPages}</span>
                 <div className="flex gap-3">
-                  <button disabled={page === 1} onClick={() => setPage(page - 1)} className="p-3 bg-white border rounded-xl disabled:opacity-30 hover:bg-green-600 hover:text-white transition-all text-green-600 shadow-sm"><ChevronLeft size={20} /></button>
-                  <button disabled={page === totalPages} onClick={() => setPage(page + 1)} className="p-3 bg-white border rounded-xl disabled:opacity-30 hover:bg-green-600 hover:text-white transition-all text-green-600 shadow-sm"><ChevronRight size={20} /></button>
+                  <button disabled={page === 1} onClick={() => setPage(page - 1)} className="p-3 bg-white border border-slate-200 rounded-xl disabled:opacity-30 hover:bg-green-600 hover:text-white transition-all text-green-600 shadow-sm">
+                    <ChevronLeft size={20} />
+                  </button>
+                  <button disabled={page === totalPages} onClick={() => setPage(page + 1)} className="p-3 bg-white border border-slate-200 rounded-xl disabled:opacity-30 hover:bg-green-600 hover:text-white transition-all text-green-600 shadow-sm">
+                    <ChevronRight size={20} />
+                  </button>
                 </div>
               </div>
             </div>
