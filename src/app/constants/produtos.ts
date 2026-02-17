@@ -125,11 +125,11 @@ export const productsData = {
     color: "#6f42c1",
     modules: [
       {
-        title: "Curso: Fundamentos Digitais para Empresas",
+        title: "Curso: Desenvolvimento ágil com 11ty",
         content: [
-          "Introdução ao marketing digital",
-          "Ferramentas essenciais para negócios online",
-          "Estratégias de presença digital"
+          "Módulo 1: Introdução ao Desenvolvimento Ágil e 11ty",
+          "Módulo 2: Configuração do Ambiente e Primeiros Passos com 11ty",
+          "Módulo 3: Estruturação de Projetos e Templates em 11ty",
         ]
       },
 
