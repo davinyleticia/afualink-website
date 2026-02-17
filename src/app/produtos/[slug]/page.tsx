@@ -176,21 +176,17 @@ const ProductPage = () => {
 
       {/* CTA Final - com banner */}
       {'banner' in product && product.banner && (
-        <section className="relative py-20 text-white">
+        <section className="relative py-20 bg-[#003366] text-white">
 
-          {/* Background com opacity */}
-          <div
-            className="absolute inset-0 bg-[url('/img/border-img.svg')] opacity-20"
-            aria-hidden="true"
-          />
+        
 
           {/* Conteúdo */}
           <div className="relative container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-black">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Pronto para transformar sua empresa?
             </h2>
 
-            <p className="mb-10 max-w-xl mx-auto text-lg text-black">
+            <p className="mb-10 max-w-xl mx-auto text-lg ">
               Junte-se a dezenas de empresas que já otimizaram seus resultados com a {product.title}.
             </p>
 
