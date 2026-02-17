@@ -2,17 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Button from '@/components/atoms/Button/Button';
 
 export default function MensageriaPage() {
   const router = useRouter();
   const [users, setUsers] = useState<any[]>([]); 
   const [isLote, setIsLote] = useState(false);
-  
-  // ESTADO ALTERADO: Agora é um Array de e-mails
   const [selectedEmails, setSelectedEmails] = useState<string[]>([]);
-  const [inputValue, setInputValue] = useState(''); // Controla o texto do input
-  
+  const [inputValue, setInputValue] = useState('');
   const [loading, setLoading] = useState(false);
+  const [statusMessage, setStatusMessage] = useState({ type: '', text: '' });
+
   const [form, setForm] = useState({
     subject: '',
     message: '',
@@ -20,6 +20,7 @@ export default function MensageriaPage() {
     canReply: true
   });
 
+  // Recupera o token de forma segura
   const token = typeof window !== 'undefined' ? localStorage.getItem('admin_token') : null;
 
   useEffect(() => {
@@ -29,59 +30,66 @@ export default function MensageriaPage() {
     }
 
     const fetchUsers = async () => {
-      const res = await fetch('https://serverless-tau-green.vercel.app/api/customer-service/42/users-messaging/list', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (res.ok) setUsers(await res.json());
+      try {
+        const res = await fetch('https://serverless-tau-green.vercel.app/api/customer-service/42/users-messaging/list', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.ok) setUsers(await res.json());
+      } catch (err) {
+        console.error("Erro ao carregar lista de usuários:", err);
+      }
     };
     fetchUsers();
   }, [token, router]);
 
-  // FUNÇÃO PARA ADICIONAR E-MAIL À LISTA
   const addEmail = (email: string) => {
-    const cleanEmail = email.trim();
-    if (cleanEmail && !selectedEmails.includes(cleanEmail)) {
+    const cleanEmail = email.trim().toLowerCase();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (cleanEmail && emailRegex.test(cleanEmail) && !selectedEmails.includes(cleanEmail)) {
       setSelectedEmails([...selectedEmails, cleanEmail]);
-      setInputValue(''); // Limpa o campo
+      setInputValue('');
+      setStatusMessage({ type: '', text: '' });
     }
   };
 
-  // FUNÇÃO PARA REMOVER E-MAIL DA LISTA
   const removeEmail = (emailToRemove: string) => {
     setSelectedEmails(selectedEmails.filter(e => e !== emailToRemove));
   };
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-
     const recipients = isLote ? users.map(u => u.email) : selectedEmails;
 
     if (recipients.length === 0) {
-      alert("Selecione ao menos um destinatário.");
-      setLoading(false);
+      setStatusMessage({ type: 'error', text: 'Selecione ao menos um destinatário válido.' });
       return;
     }
+
+    setLoading(true);
+    setStatusMessage({ type: 'info', text: 'Processando disparo de e-mails...' });
 
     try {
       const res = await fetch('/api/send-messenger', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}` 
         },
         body: JSON.stringify({ ...form, recipients })
       });
 
+      const data = await res.json();
+
       if (res.ok) {
-        alert("✅ Mensagens disparadas com sucesso!");
+        setStatusMessage({ type: 'success', text: `✅ Sucesso! ${recipients.length} e-mail(s) enviados.` });
         setForm({ ...form, subject: '', message: '' });
-        setSelectedEmails([]); // Limpa os e-mails após o envio
+        setSelectedEmails([]);
       } else {
-        alert("❌ Erro ao enviar.");
+        setStatusMessage({ type: 'error', text: `❌ Erro: ${data.error}` });
       }
     } catch (err) {
-      console.error(err);
+      setStatusMessage({ type: 'error', text: '❌ Falha crítica na comunicação com o servidor.' });
     } finally {
       setLoading(false);
     }
@@ -89,26 +97,27 @@ export default function MensageriaPage() {
 
   return (
     <main className="min-h-screen pt-34 bg-slate-50">
-      <div className="max-w-4xl mx-auto bg-white rounded-[2.5rem] shadow-xl border border-slate-200 overflow-hidden">
+      <div className="max-w-4xl mx-auto bg-white rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden mb-10">
         
-        {/* HEADER */}
-        <div className="bg-[#003366] p-8 text-white flex justify-between items-center">
-          <div>
+        {/* HEADER DINÂMICO */}
+        <div className="bg-[#003366] p-8 text-white flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-center md:text-left">
             <h1 className="text-2xl font-black uppercase italic tracking-tighter">Central de Mensageria</h1>
-            <p className="text-[10px] text-orange-500 font-bold uppercase tracking-widest mt-1">Envio Interno e Externo</p>
+            
           </div>
-          <div className="flex bg-blue-900/50 p-1 rounded-xl">
+          
+          <div className="flex bg-white/10 p-1 rounded-2xl backdrop-blur-sm">
             <button 
               type="button"
-              onClick={() => setIsLote(false)}
-              className={`px-4 py-2 rounded-lg text-[10px] font-black uppercase transition ${!isLote ? 'bg-orange-500' : 'hover:text-orange-400'}`}
+              onClick={() => { setIsLote(false); setStatusMessage({type:'', text:''}); }}
+              className={`px-6 py-2 rounded-xl text-[10px] font-black uppercase transition-all ${!isLote ? 'bg-orange-500 text-white shadow-lg' : 'text-blue-200 hover:text-white'}`}
             >
-              Individual / Grupo
+              Individual
             </button>
             <button 
               type="button"
-              onClick={() => setIsLote(true)}
-              className={`px-4 py-2 rounded-lg text-[10px] font-black uppercase transition ${isLote ? 'bg-orange-500' : 'hover:text-orange-400'}`}
+              onClick={() => { setIsLote(true); setStatusMessage({type:'', text:''}); }}
+              className={`px-6 py-2 rounded-xl text-[10px] font-black uppercase transition-all ${isLote ? 'bg-orange-500 text-white shadow-lg' : 'text-blue-200 hover:text-white'}`}
             >
               Lote ({users.length})
             </button>
@@ -117,101 +126,105 @@ export default function MensageriaPage() {
 
         <form onSubmit={handleSend} className="p-8 space-y-6">
           
-          {/* SELEÇÃO DE MÚLTIPLOS E-MAILS */}
+          {/* GESTÃO DE DESTINATÁRIOS */}
           {!isLote ? (
-            <div>
-              <label className="block text-[10px] font-black uppercase text-slate-400 mb-2 tracking-widest">Destinatários Selecionados</label>
+            <div className="animate-in slide-in-from-top-2 duration-300">
+              <label className="block text-[10px] font-black uppercase text-slate-400 mb-3 tracking-widest">
+                Destinatários ({selectedEmails.length})
+              </label>
               
-              {/* ÁREA DE TAGS */}
-              <div className="flex flex-wrap gap-2 mb-4">
+              <div className="flex flex-wrap gap-2 mb-4 min-h-[40px] p-3 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
                 {selectedEmails.map(email => (
-                  <span key={email} className="bg-orange-100 text-[#003366] px-3 py-1 rounded-full text-[10px] font-black flex items-center gap-2 border border-orange-200 animate-in fade-in zoom-in duration-300">
+                  <span key={email} className="bg-[#003366] text-white px-3 py-1.5 rounded-lg text-[10px] font-black flex items-center gap-2 hover:bg-orange-500 transition-colors">
                     {email}
-                    <button 
-                      type="button" 
-                      onClick={() => removeEmail(email)}
-                      className="hover:text-red-500 transition-colors"
-                    >
-                      ✕
-                    </button>
+                    <button type="button" onClick={() => removeEmail(email)} className="text-orange-400 hover:text-white">✕</button>
                   </span>
                 ))}
-                {selectedEmails.length === 0 && (
-                  <span className="text-[10px] text-slate-300 font-bold uppercase italic italic">Nenhum e-mail selecionado...</span>
-                )}
+                {selectedEmails.length === 0 && <span className="text-slate-300 text-[10px] font-bold uppercase italic">Aguardando seleção...</span>}
               </div>
 
               <input 
                 list="users-datalist"
-                className="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-orange-500 outline-none rounded-2xl text-sm transition-all"
-                placeholder="Busque pelo nome ou digite e aperte Enter..."
+                className="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-orange-500 outline-none rounded-2xl text-sm transition-all shadow-inner"
+                placeholder="Busque pelo nome ou digite e dê Enter..."
                 value={inputValue}
                 onChange={(e) => {
                   setInputValue(e.target.value);
-                  // Se o valor selecionado existir na lista de usuários, adiciona automaticamente
-                  const matchedUser = users.find(u => u.email === e.target.value);
+                  const matchedUser = users.find(u => u.email.toLowerCase() === e.target.value.toLowerCase());
                   if (matchedUser) addEmail(matchedUser.email);
                 }}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    addEmail(inputValue);
-                  }
+                  if (e.key === 'Enter') { e.preventDefault(); addEmail(inputValue); }
                 }}
               />
               <datalist id="users-datalist">
-                {users.map(u => (
-                  <option key={u.id} value={u.email}>{u.name}</option>
-                ))}
+                {users.map(u => <option key={u.id} value={u.email}>{u.name}</option>)}
               </datalist>
             </div>
           ) : (
-            <div className="p-4 bg-orange-50 rounded-2xl border border-orange-100 flex items-center gap-3">
-              <span className="text-xl">📢</span>
-              <p className="text-[10px] font-black text-orange-700 uppercase">O e-mail será enviado para todos os {users.length} usuários ativos do banco.</p>
+            <div className="p-6 bg-orange-50 rounded-[2rem] border border-orange-200 flex items-center gap-4 animate-in zoom-in duration-300">
+              <div className="text-3xl">📢</div>
+              <div>
+                <p className="text-[10px] font-black text-orange-700 uppercase tracking-widest">Modo Transmissão Ativado</p>
+                <p className="text-sm font-bold text-[#003366]">Esta mensagem será entregue para {users.length} usuários.</p>
+              </div>
             </div>
           )}
 
-          {/* RESTO DO FORMULÁRIO */}
-          <input 
-            type="text" required placeholder="Assunto da Mensagem"
-            className="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-orange-500 outline-none rounded-2xl text-sm font-bold"
-            value={form.subject}
-            onChange={(e) => setForm({...form, subject: e.target.value})}
-          />
+          {/* CAMPOS DE MENSAGEM */}
+          <div className="space-y-4">
+            <input 
+              type="text" required placeholder="ASSUNTO"
+              className="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-orange-500 outline-none rounded-2xl text-sm font-black text-[#003366] uppercase tracking-tight shadow-inner"
+              value={form.subject}
+              onChange={(e) => setForm({...form, subject: e.target.value})}
+            />
 
-          <textarea 
-            required placeholder="Escreva sua mensagem aqui..."
-            className="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-orange-500 outline-none rounded-2xl text-sm min-h-[200px]"
-            value={form.message}
-            onChange={(e) => setForm({...form, message: e.target.value})}
-          />
+            <textarea 
+              required placeholder="ESCREVA SUA MENSAGEM..."
+              className="w-full p-6 bg-slate-50 border-2 border-transparent focus:border-orange-500 outline-none rounded-[2rem] text-sm min-h-[220px] shadow-inner leading-relaxed"
+              value={form.message}
+              onChange={(e) => setForm({...form, message: e.target.value})}
+            />
 
-          <input 
-            type="text" placeholder="Assinatura"
-            className="w-full p-4 bg-slate-100 rounded-2xl text-slate-500 italic text-sm border-none"
-            value={form.signature}
-            onChange={(e) => setForm({...form, signature: e.target.value})}
-          />
+            <input 
+              type="text" placeholder="ASSINATURA"
+              className="w-full p-4 bg-slate-100 rounded-2xl text-slate-400 italic text-xs border-none tracking-wide"
+              value={form.signature}
+              onChange={(e) => setForm({...form, signature: e.target.value})}
+            />
+          </div>
 
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-4 border-t border-slate-100">
+          {/* FEEDBACK E AÇÕES */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-6 border-t border-slate-100">
             <label className="flex items-center gap-3 cursor-pointer group">
               <input 
                 type="checkbox"
-                className="w-5 h-5 accent-orange-500 rounded"
+                className="w-6 h-6 accent-orange-500 rounded-lg cursor-pointer"
                 checked={form.canReply}
                 onChange={(e) => setForm({...form, canReply: e.target.checked})}
               />
-              <span className="text-[10px] font-black text-slate-400 uppercase group-hover:text-slate-600 transition">Permitir Resposta (Reply-to)</span>
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest group-hover:text-[#003366] transition">Permitir Resposta</span>
             </label>
 
-            <button 
-              type="submit"
-              disabled={loading}
-              className="w-full md:w-auto bg-[#003366] hover:bg-orange-500 text-white px-12 py-4 rounded-2xl font-black uppercase text-xs transition-all shadow-lg disabled:opacity-50"
-            >
-              {loading ? 'Processando Disparo...' : `Disparar para ${isLote ? users.length : selectedEmails.length} pessoas`}
-            </button>
+            <div className="flex flex-col items-end gap-2 w-full md:w-auto">
+              {statusMessage.text && (
+                <p className={`text-[9px] font-black uppercase px-4 py-2 rounded-lg mb-2 ${
+                  statusMessage.type === 'success' ? 'bg-green-100 text-green-700' : 
+                  statusMessage.type === 'error' ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700'
+                }`}>
+                  {statusMessage.text}
+                </p>
+              )}
+              
+              <button 
+                type="submit"
+                disabled={loading}
+                className="w-full md:w-auto bg-[#003366] hover:bg-orange-500 text-white px-16 py-5 rounded-2xl font-black uppercase text-xs transition-all shadow-xl disabled:opacity-50 active:scale-95"
+              >
+                {loading ? 'Disparando...' : `Disparar para ${isLote ? users.length : selectedEmails.length} Alunos`}
+              </button>
+            </div>
           </div>
         </form>
       </div>
