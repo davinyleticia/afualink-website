@@ -33,7 +33,7 @@ const Footer = () => {
               <Link href="https://afulink.com/produtos/consultoria">Consultoria</Link>
             </div>
             <div className={styles.linkColumn}>
-              <h4>Treinamentos</h4>
+              <h4>Treinamentos B2C</h4>
               <Link href="https://afulink.com/treinamento/desenvolvimento-agil-com-11ty">Desenvolvimento ágil com 11ty</Link>
               
             </div>
