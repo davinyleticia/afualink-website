@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { notFound, useParams, useRouter } from 'next/navigation';
 import Button from '@/components/atoms/Button/Button';
 
 export default function TrainingLP() {
@@ -15,7 +15,7 @@ export default function TrainingLP() {
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 200);
     window.addEventListener('scroll', handleScroll);
-    
+
     const fetchLPData = async () => {
       try {
         const res = await fetch(`https://serverless-tau-green.vercel.app/api/customer-service/training/${id}`);
@@ -31,12 +31,13 @@ export default function TrainingLP() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [id]);
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center font-black text-slate-300 animate-pulse uppercase tracking-widest">Carregando Experiência...</div>;
-  if (!training) return <div className="min-h-screen flex items-center justify-center font-bold">Treinamento não localizado.</div>;
-
+  if (loading) return <div className="min-h-screen flex items-center justify-center font-black text-slate-300 animate-pulse uppercase tracking-widest">Carregando...</div>;
+  if (!training) {
+    notFound();
+  }
   return (
     <main className="min-h-screen bg-white font-sans selection:bg-orange-500 selection:text-white">
-      
+
       {/* 0. STICKY HEADER */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 px-6 py-4 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-lg translate-y-0' : '-translate-y-full'}`}>
         <div className="max-w-6xl mx-auto flex justify-between items-center">
@@ -73,10 +74,10 @@ export default function TrainingLP() {
           <div className="flex-1 w-full lg:w-auto">
             <div className="relative group">
               <div className="absolute -inset-4 bg-orange-500/20 rounded-[3rem] blur-2xl group-hover:bg-orange-500/30 transition duration-500"></div>
-              <img 
-                src={training.imgbanner} 
-                alt={training.title} 
-                className="relative rounded-[2.5rem] shadow-2xl border-4 border-white/10 w-full aspect-video lg:aspect-square object-cover" 
+              <img
+                src={training.imgbanner}
+                alt={training.title}
+                className="relative rounded-[2.5rem] shadow-2xl border-4 border-white/10 w-full aspect-video lg:aspect-square object-cover"
               />
             </div>
           </div>
@@ -108,7 +109,7 @@ export default function TrainingLP() {
           <div className="w-20 h-1.5 bg-orange-500 rounded-full"></div>
           <p className="mt-6 text-slate-400 text-[10px] font-black uppercase tracking-[0.3em]">Cronograma Completo</p>
         </div>
-        
+
         <div className="grid md:grid-cols-2 gap-6">
           {training.syllabus?.map((item: any, idx: number) => (
             <div key={item.id} className="group bg-white p-8 rounded-3xl border border-slate-100 hover:border-orange-200 hover:shadow-xl transition-all duration-300">
@@ -127,11 +128,11 @@ export default function TrainingLP() {
             <h2 className="text-3xl font-black text-[#003366] uppercase italic">Perguntas Comuns</h2>
             <div className="w-16 h-1 bg-orange-500 mx-auto mt-4"></div>
           </div>
-          
+
           <div className="space-y-4">
             {training.faq?.map((f: any, idx: number) => (
               <div key={f.id} className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
-                <button 
+                <button
                   onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
                   className="w-full p-6 text-left flex justify-between items-center group transition-colors hover:bg-slate-50"
                 >
@@ -151,22 +152,22 @@ export default function TrainingLP() {
 
       {/* 5. CTA FINAL */}
       <section className="py-24 bg-[#003366] text-white overflow-hidden relative">
-          <div className="absolute top-0 left-0 w-full h-full bg-orange-500/5 -skew-y-6 translate-y-24"></div>
-          <div className="container mx-auto px-4 text-center relative z-10">
-            <h2 className="text-4xl md:text-5xl font-black uppercase italic mb-6 tracking-tighter">Pronto para transformar sua carreira?</h2>
-            <p className="text-blue-100 mb-12 max-w-xl mx-auto text-lg font-medium opacity-80">
-              Garanta sua vaga agora mesmo e comece sua jornada na Afulink.
-            </p>
-            <div className="flex flex-col md:flex-row justify-center items-center gap-6">
-              <a href={training.enroll} className="bg-orange-500 text-white px-12 py-4 rounded-2xl font-black uppercase text-xs hover:scale-105 transition-all shadow-xl shadow-orange-500/20">
-                Garantir minha vaga
-              </a>
-              
-            </div>
-          </div>
-        </section>
+        <div className="absolute top-0 left-0 w-full h-full bg-orange-500/5 -skew-y-6 translate-y-24"></div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <h2 className="text-4xl md:text-5xl font-black uppercase italic mb-6 tracking-tighter">Pronto para transformar sua carreira?</h2>
+          <p className="text-blue-100 mb-12 max-w-xl mx-auto text-lg font-medium opacity-80">
+            Garanta sua vaga agora mesmo e comece sua jornada na Afulink.
+          </p>
+          <div className="flex flex-col md:flex-row justify-center items-center gap-6">
+            <a href={training.enroll} className="bg-orange-500 text-white px-12 py-4 rounded-2xl font-black uppercase text-xs hover:scale-105 transition-all shadow-xl shadow-orange-500/20">
+              Garantir minha vaga
+            </a>
 
-      
+          </div>
+        </div>
+      </section>
+
+
     </main>
   );
 }
