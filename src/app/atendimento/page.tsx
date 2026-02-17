@@ -71,7 +71,7 @@ export default function AtendimentoPage() {
                 <option value="">O que deseja consultar?</option>
                 <option value="certificates/list_certificates">Meus Certificados</option>
                 <option value="invoices/list_invoices">Financeiro / Boletos</option>
-                <option value="documents/list_documents">Documentos e Declarações</option>
+                <option value="documents/list_documents">Documentos, Declarações e Históricos</option>
               </select>
               <input type="text" placeholder="Seu RA" className={styles.inputField} value={ra} onChange={e => setRa(e.target.value)} required />
               <input type="password" placeholder="Sua Senha" className={styles.inputField} value={password} onChange={e => setPassword(e.target.value)} required />
