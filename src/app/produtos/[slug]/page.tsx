@@ -207,7 +207,7 @@ const ProductPage = () => {
                   <button
                     className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 font-semibold transition"
                   >
-                    Criar
+                    Venha falar com especialista
                   </button>
 
                 </div>
