@@ -126,10 +126,9 @@ export const productsData = {
     modules: [
       {
         title: "Curso: Desenvolvimento ágil com 11ty",
+        url: "https://afulink.com/treinamento/desenvolvimento-agil-com-11ty",
         content: [
-          "Módulo 1: Introdução ao Desenvolvimento Ágil e 11ty",
-          "Módulo 2: Configuração do Ambiente e Primeiros Passos com 11ty",
-          "Módulo 3: Estruturação de Projetos e Templates em 11ty",
+    
         ]
       },
 

@@ -123,13 +123,18 @@ const ProductPage = () => {
                   {module.title}
                   <span className="text-[#f37021]">+</span>
                 </summary>
+                
                 <ul className={styles.moduleList}>
                   {module.content.map((topic, j) => (
                     <li key={j}>{topic}</li>
                   ))}
+
+              <Button href={module.url} variant="primary">Mais informações</Button>
                 </ul>
+                
               </details>
             ))}
+         
           </div>
         </section>
       )}
