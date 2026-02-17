@@ -184,14 +184,14 @@ export const productsData = {
         widthImg: "60%",
         title: "Consultoria",
         imageIndex: 0,
-        text: "Definição dos requisitos e especificações técnicas do produto.\nDefinição da arquitetura de software do projeto.\nEscolha do sistema operacional (Linux, Android, RTOS, etc).\nEscolha e integração de pacotes e bibliotecas de código aberto.\nSeleção e configuração das ferramentas de desenvolvimento.\nRevisão de código e controle de qualidade.\nLevantamento de conformidade com licenças de código aberto.\nLevantamento de falhas de segurança e pentest de produtos eletrônicos."      },
+        text: "✔️ Definição dos requisitos e especificações técnicas do produto.\n ✔️ Definição da arquitetura de software do projeto.\n ✔️ Escolha do sistema operacional (Linux, Android, RTOS, etc).\n ✔️ Escolha e integração de pacotes e bibliotecas de código aberto.\n ✔️ Seleção e configuração das ferramentas de desenvolvimento.\n ✔️ Revisão de código e controle de qualidade.\n ✔️ Levantamento de conformidade com licenças de código aberto.\n ✔️ Levantamento de falhas de segurança e pentest de produtos eletrônicos."      },
       {
         url: "/img/consult-2.webp",
         alt: "Processador",
         widthImg: "60%",
         imageIndex: 1,
         title: "Desenvolvimento",
-        text: "Desenvolvimento de firmware (C, C++ e Assembly).\nSoftware com sistemas operacionais de tempo real (FreeRTOS, Zephyr, etc).\nDesenvolvimento de device drivers para ARM, PPC, MIPS e x86.\nPorte de aplicações e sistemas operacionais para diferentes plataformas e arquiteturas.\nDesenvolvimento e customização de distribuições Linux (Buildroot, Yocto Project).\nDesenvolvimento de device drivers para o kernel Linux.\nDesenvolvimento de BSP (Board Support Package) para diferentes plataformas de hardware.\nConfiguração de ambiente de desenvolvimento para Linux embarcado."
+        text: "✔️ Desenvolvimento de firmware (C, C++ e Assembly).\n ✔️ Software com sistemas operacionais de tempo real (FreeRTOS, Zephyr, etc).\n ✔️ Desenvolvimento de device drivers para ARM, PPC, MIPS e x86.\n ✔️ Porte de aplicações e sistemas operacionais para diferentes plataformas e arquiteturas.\n ✔️ Desenvolvimento e customização de distribuições Linux (Buildroot, Yocto Project).\n ✔️ Desenvolvimento de device drivers para o kernel Linux.\n ✔️ Desenvolvimento de BSP (Board Support Package) para diferentes plataformas de hardware.\n ✔️ Configuração de ambiente de desenvolvimento para Linux embarcado."
 
       },
     ],
