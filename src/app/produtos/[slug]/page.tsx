@@ -38,7 +38,7 @@ const ProductPage = () => {
 
             <div className="flex flex-wrap gap-4 mt-10">
               {product.login && <Button href={product.login} variant="primary">login</Button>}
-              <Button href="/contato" variant="secondary" >Venha falar com especialista</Button>
+              {product.type !== 'biolink' && <Button href="/contato" variant="secondary" >Venha falar com especialista</Button>}
             </div>
           </div>
 

@@ -4,6 +4,7 @@ import { text } from "stream/consumers";
 // constants/products.ts
 export const productsData = {
   'biolink': {
+    type: 'biolink',
     title: "Visitela Biolink",
     tagline: "Venha se aconchegar no nosso servidor e tenha uma experiência única.",
     description: "Se junta ao universo visitela, com o seu: nome, comércio, banda, influencer e partilhe com quem quiser.",
@@ -36,6 +37,7 @@ export const productsData = {
     login: 'https://biolink.visite.la/',
   },
   'cms': {
+    type: 'cms',
     title: "Visitela CMS",
     tagline: "Gestão de conteúdo sem complicações.",
     description: "Controle total sobre o conteúdo do seu site com uma interface intuitiva.",
@@ -75,6 +77,7 @@ export const productsData = {
     login: 'https://cms.visite.la/',
   },
   'arquivme': {
+    type: 'arquivme',  
     title: "Arquivme Drive Local NAS",
     tagline: "Seu armazenamento, sua privacidade.",
     description: "Armazene e gerencie seus dados localmente com segurança total.",
@@ -114,6 +117,7 @@ export const productsData = {
 
   },
   'treinamento': {
+    type: 'treinamento',
     title: "Treinamento B2B",
     tagline: "Capacitação para o sucesso empresarial.",
     description: "Programas de treinamento personalizados para elevar a performance da sua equipe.",
@@ -162,6 +166,7 @@ export const productsData = {
     login: '',
   },
   'consultoria': {
+    type: 'consultoria',
     title: "Consultoria",
     tagline: "Transformação digital sob medida.",
     description: "Soluções estratégicas para impulsionar a inovação na sua empresa.",
