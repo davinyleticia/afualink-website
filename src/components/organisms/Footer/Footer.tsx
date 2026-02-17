@@ -34,8 +34,8 @@ const Footer = () => {
             </div>
             <div className={styles.linkColumn}>
               <h4>Treinamentos</h4>
-              <Link href="https://afulink.com/treinamento/Fundamentos-Digitais-para-Empresas">Fundamentos Digitais para Empresas</Link>
-              <Link href="https://afulink.com/treinamento/Desenvolvimento-Python">Desenvolvimento Python</Link>
+              <Link href="https://afulink.com/treinamento/desenvolvimento-agil-com-11ty">Desenvolvimento agil com 11ty</Link>
+              
             </div>
             <div className={styles.linkColumn}>
               <h4>Informações</h4>
