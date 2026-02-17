@@ -88,7 +88,7 @@ export default function TrainingLP() {
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
             { label: 'Certificado', val: 'Incluso', icon: '📜' },
-            { label: 'Acesso', val: 'Vitalício', icon: '⚡' },
+            { label: 'Acesso', val: 'Durante o treinamento', icon: '⚡' },
             { label: 'Suporte', val: 'Prioritário', icon: '💬' },
             { label: 'Formato', val: '100% Online', icon: '🌍' },
           ].map((item, i) => (
