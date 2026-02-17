@@ -14,8 +14,6 @@ const Footer = () => {
             <div className={styles.legal}>
               <Link href="/termos">Termo de Uso</Link> | <Link href="/privacidade">Privacidade</Link>
             </div>
-            <p className={styles.trademark}>Afulink Educação, Tecnologia e Inovação Ltda</p>
-            <p className={styles.trademark}><strong>Trademark Afulink® 2021 - 2026</strong></p>
           </div>
 
           {/* Colunas de Links */}
@@ -25,6 +23,19 @@ const Footer = () => {
               <Link href="/sobre">Sobre</Link>
               <Link href="/carreira">Carreira</Link>
               <Link href="/contato">Contato</Link>
+            </div>
+            <div className={styles.linkColumn}>
+              <h4>Produtos</h4>
+              <Link href="produto/biolink">Biolink</Link>
+              <Link href="produto/cms">CMS</Link>
+              <Link href="produto/arquivme">Arquivme</Link>
+              <Link href="produto/treinamento">Treinamento</Link>
+              <Link href="produto/consultoria">Consultoria</Link>
+            </div>
+            <div className={styles.linkColumn}>
+              <h4>Treinamentos</h4>
+              <Link href="treinamento/Fundamentos-Digitais-para-Empresas">Fundamentos Digitais para Empresas</Link>
+              <Link href="treinamento/Desenvolvimento-Python">Desenvolvimento Python</Link>
             </div>
             <div className={styles.linkColumn}>
               <h4>Informações</h4>
@@ -45,6 +56,12 @@ const Footer = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className={styles.trademarkContainer}>
+        <p className={styles.trademark}>Afulink Educação, Tecnologia e Inovação Ltda</p>
+        <p className={styles.trademark}><strong>Visitela, Arquivme e Afulink são marcas e produtos da Afulink®.</strong></p>
+        <p className={styles.trademark}><strong>
+          Todos os direitos reservados. © 2021 – 2026. Trademark.</strong></p>
       </div>
     </footer>
   );

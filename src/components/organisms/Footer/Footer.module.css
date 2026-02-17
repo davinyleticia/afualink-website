@@ -44,7 +44,7 @@
 .linksGrid {
   flex: 3;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
 }
 
@@ -66,4 +66,10 @@
 
 .linkColumn a:hover {
   color: #de407c;
+}
+.trademarkContainer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #eaeaea;
+  padding: 1rem 0;
+  text-align: center;
 }
