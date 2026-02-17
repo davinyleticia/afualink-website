@@ -37,7 +37,7 @@ export default function TrainingLP() {
   return (
     <main className="min-h-screen bg-white font-sans selection:bg-orange-500 selection:text-white">
       
-      {/* 0. STICKY HEADER (Aparece no Scroll) */}
+      {/* 0. STICKY HEADER */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 px-6 py-4 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-lg translate-y-0' : '-translate-y-full'}`}>
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <span className="font-black text-[#003366] uppercase italic text-sm">{training.title}</span>
@@ -61,7 +61,7 @@ export default function TrainingLP() {
               {training.description}
             </p>
             <div className="flex flex-wrap gap-6 items-center">
-              <a href={training.enroll} className="bg-orange-500 text-white px-10 py-5 rounded-2xl font-black uppercase text-xs hover:bg-white hover:text-[#003366] transition-all shadow-2xl shadow-orange-500/20 active:scale-95">
+              <a href={training.enroll} className="bg-orange-500 text-white px-10 py-5 rounded-2xl font-black uppercase text-xs hover:bg-white hover:text-[#003366] transition-all shadow-2xl shadow-orange-500/20 active:scale-95 text-center">
                 Quero garantir minha vaga
               </a>
               <div className="flex flex-col">
@@ -83,7 +83,7 @@ export default function TrainingLP() {
         </div>
       </section>
 
-      {/* 2. DIFERENCIAIS (O QUE VOCÊ COLOCOU A MAIS) */}
+      {/* 2. DIFERENCIAIS */}
       <section className="py-16 px-6 border-b border-slate-100">
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
@@ -101,12 +101,12 @@ export default function TrainingLP() {
         </div>
       </section>
 
-      {/* 3. SYLLABUS (CONTEÚDO PROGRAMÁTICO) */}
+      {/* 3. SYLLABUS */}
       <section className="py-24 px-6 max-w-5xl mx-auto">
         <div className="flex flex-col items-center mb-16 text-center">
           <h2 className="text-3xl font-black text-[#003366] uppercase italic mb-4">O que você vai dominar</h2>
           <div className="w-20 h-1.5 bg-orange-500 rounded-full"></div>
-          <p className="mt-6 text-slate-400 text-[10px] font-black uppercase tracking-[0.3em]">{training.question_description || 'Cronograma Completo'}</p>
+          <p className="mt-6 text-slate-400 text-[10px] font-black uppercase tracking-[0.3em]">Cronograma Completo</p>
         </div>
         
         <div className="grid md:grid-cols-2 gap-6">
@@ -120,8 +120,8 @@ export default function TrainingLP() {
         </div>
       </section>
 
-      {/* 4. FAQ SECTION (ACCORDION) */}
-      <section className="py-24 px-6 bg-slate-100">
+      {/* 4. FAQ SECTION (FUNDO CLARO) */}
+      <section className="py-24 px-6 bg-slate-50 border-t border-slate-100">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-black text-[#003366] uppercase italic">Perguntas Comuns</h2>
@@ -130,16 +130,16 @@ export default function TrainingLP() {
           
           <div className="space-y-4">
             {training.faq?.map((f: any, idx: number) => (
-              <div key={f.id} className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+              <div key={f.id} className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
                 <button 
                   onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
-                  className="w-full p-6 text-left flex justify-between items-center group"
+                  className="w-full p-6 text-left flex justify-between items-center group transition-colors hover:bg-slate-50"
                 >
-                  <span className="font-bold text-slate-200 group-hover:text-orange-400 transition-colors">{f.question}</span>
-                  <span className={`text-orange-500 transition-transform duration-300 font-black ${activeFaq === idx ? 'rotate-45' : ''}`}>+</span>
+                  <span className="font-bold text-slate-700 group-hover:text-[#003366] transition-colors">{f.question}</span>
+                  <span className={`text-orange-500 transition-transform duration-300 font-black text-xl ${activeFaq === idx ? 'rotate-45' : ''}`}>+</span>
                 </button>
                 <div className={`transition-all duration-300 ease-in-out overflow-hidden ${activeFaq === idx ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-                  <p className="p-6 pt-0 text-slate-400 text-sm leading-relaxed border-t border-white/5">
+                  <p className="p-6 pt-0 text-slate-500 text-sm leading-relaxed border-t border-slate-100 italic">
                     {f.answer}
                   </p>
                 </div>
@@ -150,20 +150,23 @@ export default function TrainingLP() {
       </section>
 
       {/* 5. CTA FINAL */}
-      <section className="py-20 bg-[#003366] text-white">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Pronto para transformar sua carreira?</h2>
-            <p className="text-blue-100 mb-10 max-w-xl mx-auto text-lg">
-              Garantir minha vaga
+      <section className="py-24 bg-[#003366] text-white overflow-hidden relative">
+          <div className="absolute top-0 left-0 w-full h-full bg-orange-500/5 -skew-y-6 translate-y-24"></div>
+          <div className="container mx-auto px-4 text-center relative z-10">
+            <h2 className="text-4xl md:text-5xl font-black uppercase italic mb-6 tracking-tighter">Pronto para transformar sua carreira?</h2>
+            <p className="text-blue-100 mb-12 max-w-xl mx-auto text-lg font-medium opacity-80">
+              Garanta sua vaga agora mesmo e comece sua jornada na Afulink.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button href="/contato" variant="primary">Falar com Especialista</Button>
-              {/* <a href="https://wa.me/seunumeroaqui" className="border-2 border-white/30 hover:bg-white/10 px-8 py-3 rounded-full font-bold transition-all">
-        Falar no WhatsApp
-      </a> */}
+            <div className="flex flex-col md:flex-row justify-center items-center gap-6">
+              <a href={training.enroll} className="bg-orange-500 text-white px-12 py-4 rounded-2xl font-black uppercase text-xs hover:scale-105 transition-all shadow-xl shadow-orange-500/20">
+                Garantir minha vaga
+              </a>
+              
             </div>
           </div>
         </section>
+
+      
     </main>
   );
 }
