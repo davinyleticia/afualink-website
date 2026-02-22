@@ -57,7 +57,7 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles.trademarkContainer}>
-        {/* <p className={styles.trademark}>Afulink Educação, Tecnologia e Inovação Ltda</p> */}
+        <p className={styles.trademark}>Afulink Educação, Tecnologia e Inovação Ltda</p>
         <p className={styles.trademark}><strong>Visitela, Arquivme e Afulink são marcas e produtos da Afulink®.</strong></p>
         <p className={styles.trademark}><strong>
           Todos os direitos reservados. © 2021 – 2026. Trademark.</strong></p>
