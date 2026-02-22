@@ -36,46 +36,6 @@ export const productsData = {
     imgPrincipal: "/img/pc-start.svg", altPrincipal: "Imagem principal do Visitela Biolink", widthImgPrincipal: "370%",
     login: 'https://biolink.visite.la/',
   },
-  'cms': {
-    type: 'cms',
-    title: "Visitela CMS",
-    tagline: "Gestão de conteúdo sem complicações.",
-    description: "Controle total sobre o conteúdo do seu site com uma interface intuitiva.",
-    features: ["Editor Online", "Otimização SEO", "Painel Administrativo"],
-    color: "#003366",
-    faq: [
-      { q: "O CMS é adequado para iniciantes?", a: "Sim, nosso CMS foi projetado para ser fácil de usar, mesmo para quem não tem experiência técnica." },
-      { q: "Posso integrar meu CMS com outras ferramentas?", a: "Sim, oferecemos várias integrações com ferramentas populares de marketing e análise." }
-    ],
-    modules: [],
-    gallery: [
-      {
-        url: '/img/visitela.svg',
-        alt: 'Interface desktop Visitela',
-        widthImg: "30%",
-        title: "RP1",
-        text: "Raspberry Pi 5 is built using the RP1 controller, a package containing silicon designed in-house at Raspberry Pi.\nUSB 3 has more total bandwidth, for much faster transfer speeds.\n\nCamera and DSI display connectors are interchangeable, so you can have one of each, or two the same."
-      },
-      {
-        url: "/img/tela-start11.svg",
-        alt: "Processador",
-        widthImg: "60%",
-        title: "More than twice as fast and infinitely smoother",
-        text: "Raspberry Pi 5 features the Broadcom BCM2712 quad-core Arm Cortex-A76 processor @ 2.4GHz, making it up to three times faster than the previous generation.\n\nWith RAM variants up to 16GB, this is the fastest, smoothest Raspberry Pi experience yet."
-      },
-      {
-        url: "/img/pc-start.svg",
-        alt: "PCI Express",
-        widthImg: "60%",
-        title: "All aboard the PCI express",
-        text: "The addition of Raspberry Pi’s PCI express lane allows you to connect an M.2 SSD to your Raspberry Pi, giving you speedy data transfer and super-fast boot."
-      }
-    ],
-
-    banner: "",
-    imgPrincipal: "/img/cms.png", altPrincipal: " Imagem principal do Visitela CMS", widthImgPrincipal: "370%",
-    login: 'https://cms.visite.la/',
-  },
   'arquivme': {
     type: 'arquivme',  
     title: "Arquivme Drive Local NAS",
