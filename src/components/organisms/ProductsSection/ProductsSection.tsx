@@ -3,9 +3,11 @@ import ProductCard from '../../molecules/ProductCard/ProductCard';
 
 const productsData = [
   { id: 1, title: "Visitela Biolink", description: "Sua vitrine digital personalizada para redes sociais.", link: "/produtos/biolink" },
-  { id: 3, title: "Arquivme Drive Local NAS", description: "Privacidade e controle total dos seus dados com storage local.", link: "/produtos/arquivme" },
-  { id: 4, title: "Treinamento B2B", description: "Capacitação técnica para elevar o nível da sua equipe.", link: "/produtos/treinamento" },
+  { id: 2, title: "Habitat Smart", description: "Gerenciamento inteligente para condomínios modernos.", link: "/produtos/habitatsmart" },
+  // { id: 3, title: "Arquivme Drive Local NAS", description: "Privacidade e controle total dos seus dados com storage local.", link: "/produtos/arquivme" },
+  { id: 4, title: "Treinamento B2B", description: "Capacitação técnica empresarial para elevar o nível da sua equipe.", link: "/produtos/treinamento" },
   { id: 5, title: "Consultoria", description: "Estratégia personalizada para acelerar sua transformação digital.", link: "/produtos/consultoria" },
+  { id: 6, title: "Treinamento B2C", description: "Cursos online para capacitação técnica e desenvolvimento pessoal.", link: "/produtos/treinamento-b2c" },
 ];
 
 const ProductsSection = () => {

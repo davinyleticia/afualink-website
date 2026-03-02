@@ -36,6 +36,38 @@ export const productsData = {
     imgPrincipal: "/img/pc-start.svg", altPrincipal: "Imagem principal do Visitela Biolink", widthImgPrincipal: "370%",
     login: 'https://biolink.visite.la/',
   },
+   'habitatsmart': {
+    type: 'habitatsmart',
+    title: "Habitat Smart",
+    tagline: "Transforme Gerenciamento administrativo do seu condomínio com o Habitat Smart",
+    description: "gerenciamento de encomenda, wifi publico, visitas. e cadastro dos moradores. Tudo isso em um só lugar, com a segurança e praticidade que você merece.",
+    features: ["Gerenciamento de Encomendas", "Wi-Fi Público", "Cadastro de Moradores"],
+    color: "#007bff",
+    faq: [
+      { q: "O Habitat Smart é compatível com quais tipos de condomínios?", a: "Ele é projetado para ser flexível e pode ser adaptado para condomínios residenciais, comerciais e mistos." },
+      { q: "Posso personalizar as funcionalidades do sistema?", a: "Sim, o Habitat Smart oferece opções de personalização para atender às necessidades específicas do seu condomínio." }
+    ],
+    modules: [],
+    gallery: [
+      {
+        url: '/img/visitela.svg', 
+        alt: 'Interface desktop Visitela',
+        widthImg: "30%",
+        title: "RP1",
+        text: "Raspberry Pi 5 is built using the RP1 controller, a package containing silicon designed in-house at Raspberry Pi.\nUSB 3 has more total bandwidth, for much faster transfer speeds.\n\nCamera and DSI display connectors are interchangeable, so you can have one of each, or two the same."
+      },
+      {
+        url: "/img/tela-start11.svg",
+        alt: "Processador",
+        widthImg: "60%",
+        title: "More than twice as fast and infinitely smoother",
+        text: "Raspberry Pi 5 features the Broadcom BCM2712 quad-core Arm Cortex-A76 processor @ 2.4GHz, making it up to three times faster than the previous generation.\n\nWith RAM variants up to 16GB, this is the fastest, smoothest Raspberry Pi experience yet."
+      },
+    ],
+    banner: "/img/habitat-banner.png", alt: "Banner do Habitat Smart",
+    imgPrincipal: "/img/habitat-smart.png", altPrincipal: "Imagem principal do Habitat Smart", widthImgPrincipal: "370%",
+    login: '',
+  },
   'arquivme': {
     type: 'arquivme',  
     title: "Arquivme Drive Local NAS",
@@ -63,13 +95,6 @@ export const productsData = {
         title: "More than twice as fast and infinitely smoother",
         text: "Raspberry Pi 5 features the Broadcom BCM2712 quad-core Arm Cortex-A76 processor @ 2.4GHz, making it up to three times faster than the previous generation.\n\nWith RAM variants up to 16GB, this is the fastest, smoothest Raspberry Pi experience yet."
       },
-      {
-        url: "/img/pc-start.svg",
-        alt: "PCI Express",
-        widthImg: "60%",
-        title: "All aboard the PCI express",
-        text: "The addition of Raspberry Pi’s PCI express lane allows you to connect an M.2 SSD to your Raspberry Pi, giving you speedy data transfer and super-fast boot."
-      }
     ],
     banner: "",
     imgPrincipal: "/img/nas-arquivme.png", altPrincipal: "NAS", widthImgPrincipal: "370%",
